@@ -63,3 +63,6 @@ target/
 # Editor files
 *~
 *#
+
+# System files/folders
+.DS_Store
