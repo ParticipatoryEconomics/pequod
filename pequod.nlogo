@@ -460,10 +460,8 @@ to-report effort-exponent
 end
 
 to-report product-price
-  if industry = 0 and product = 1 [report final-price 1]
-  if industry = 0 and product = 2 [report final-price 2]
-  if industry = 1 and product = 1 [report input-price 1]
-  if industry = 1 and product = 2 [report input-price 2]
+  if industry = 0 [report final-price product]
+  if industry = 1 [report input-price product]
 end
 
 
