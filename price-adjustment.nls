@@ -1,0 +1,144 @@
+
+to planning-bureau-3
+  set final-surpluses (list)
+  foreach final-goods [
+    let I ?
+    let supply sum [output] of final-producers I
+    let demand sum [ final-demand I ] of ccs
+    let surplus (supply - demand)
+    set final-surpluses lput surplus final-surpluses
+    let delta check-bounds ( price-delta * abs surplus / supply )
+    let new-price final-price I
+    if surplus > 0 [ set new-price final-price I * (1 - delta) ]
+    if surplus < 0 [ set new-price final-price I * (1 + delta) ]
+    set final-prices replace-item (I - 1) final-prices new-price
+  ]
+  
+  set input-surpluses (list)
+  foreach intermediate-inputs [
+    let I ?
+    let supply sum [output] of input-producers I
+    let demand sum [ input-quantity I ] of wcs
+    let surplus (supply - demand)
+    set input-surpluses lput surplus input-surpluses
+    let delta check-bounds ( price-delta * abs surplus / supply )
+    let new-price input-price I
+    if surplus > 0 [ set new-price input-price I * (1 - delta) ]
+    if surplus < 0 [ set new-price input-price I * (1 + delta) ]
+    set input-prices replace-item (I - 1) input-prices new-price
+  ]
+  
+  set resource-surpluses (list)
+  foreach resource-types [
+    let I ?
+    let supply natural-resources-supply                 ;;only one type of natural resource at present
+    let demand sum [ resource-quantity I ] of wcs
+    let surplus (supply - demand)
+    set resource-surpluses lput surplus resource-surpluses
+    let delta check-bounds ( price-delta * abs surplus / supply )
+    let new-price resource-price I
+    if surplus > 0 [ set new-price resource-price I * (1 - delta) ]
+    if surplus < 0 [ set new-price resource-price I * (1 + delta) ]
+    set resource-prices replace-item (I - 1) resource-prices new-price
+  ]
+  
+  set labor-surpluses (list)
+  foreach labor-types [
+    let I ?
+    let supply labor-supply                            ;;only one type of labor at present
+    let demand sum [ labor-quantity I ] of wcs
+    let surplus (supply - demand)
+    set labor-surpluses lput surplus labor-surpluses
+    let delta check-bounds ( price-delta * abs surplus / supply )
+    let new-price labor-price I
+    if surplus > 0 [ set new-price labor-price I * (1 - delta) ]
+    if surplus < 0 [ set new-price labor-price I * (1 + delta) ]
+    set labor-prices replace-item (I - 1) labor-prices new-price
+  ]
+  
+;  set total-surplus (sum map abs final-surpluses + sum map abs input-surpluses + sum map abs resource-surpluses + sum map abs labor-surpluses)
+  
+  set price-f1 final-price 1
+  set price-f2 final-price 2
+  set price-i1 input-price 1
+  set price-i2 input-price 2
+  set price-n resource-price 1
+  set price-l labor-price 1
+end
+
+
+to planning-bureau-2
+  let supply-f1 sum [output] of pf1s
+  let demand-f1 sum [df1] of ccs
+  set surplus-f1 supply-f1 - demand-f1
+  let price-delta-f1 price-delta * abs surplus-f1 / supply-f1
+  if surplus-f1 > 0 [ set price-f1 price-f1 * (1 - price-delta-f1) ]
+  if surplus-f1 < 0 [ set price-f1 price-f1 * (1 + price-delta-f1) ]
+  
+  let supply-f2 sum [output] of pf2s
+  let demand-f2 sum [df2] of ccs
+  set surplus-f2 supply-f2 - demand-f2
+  let price-delta-f2 price-delta * abs surplus-f2 / supply-f2
+  if surplus-f2 > 0 [ set price-f2 price-f2 * (1 - price-delta-f2) ]
+  if surplus-f2 < 0 [ set price-f2 price-f2 * (1 + price-delta-f2) ]
+    
+  let supply-i1 sum [output] of pi1s
+  let demand-i1 sum [input-quantity 1] of (turtle-set pfs pi2s)
+;  let demand-i1 sum [qi1] of (turtle-set pfs pi2s)
+  set surplus-i1 supply-i1 - demand-i1
+  let price-delta-i1 price-delta * abs surplus-i1 / supply-i1
+  if surplus-i1 > 0 [ set price-i1 price-i1 * (1 - price-delta-i1) ]
+  if surplus-i1 < 0 [ set price-i1 price-i1 * (1 + price-delta-i1) ]
+  
+  let supply-i2 sum [output] of pi2s
+  let demand-i2 sum [input-quantity 2] of (turtle-set pfs pi1s)
+;  let demand-i2 sum [qi2] of (turtle-set pfs pi1s)
+  set surplus-i2 supply-i2 - demand-i2
+  let price-delta-i2 price-delta * abs surplus-i2 / supply-i2
+  if surplus-i2 > 0 [ set price-i2 price-i2 * (1 - price-delta-i2) ]
+  if surplus-i2 < 0 [ set price-i2 price-i2 * (1 + price-delta-i2) ]
+    
+  let supply-n natural-resources-supply
+  let demand-n sum [qn] of wcs
+  set surplus-n supply-n - demand-n
+  let price-delta-n price-delta * abs surplus-n / supply-n
+  if surplus-n > 0 [ set price-n price-n * (1 - price-delta-n) ]
+  if surplus-n < 0 [ set price-n price-n * (1 + price-delta-n) ]
+    
+  let supply-l labor-supply
+  let demand-l sum [ql] of wcs
+  set surplus-l supply-l - demand-l
+  let price-delta-l price-delta * abs surplus-l / supply-l
+  if surplus-l > 0 [ set price-l price-l * (1 - price-delta-l) ]
+  if surplus-l < 0 [ set price-l price-l * (1 + price-delta-l) ]
+
+;  set total-surplus (abs surplus-f1 + abs surplus-f2 + abs surplus-i1 + abs surplus-i2 + abs surplus-n + abs surplus-l)
+  list-prices
+end
+
+to planning-bureau
+  
+  let SQf1 sum [output] of pf1s
+  let SDf1 sum [df1] of ccs
+  set price-f1 check-bounds (price-f1 * (price-f1 ^ 2 + SQf1 * SDf1) / (price-f1 ^ 2 + SQf1 ^ 2))
+
+  let SQf2 sum [output] of pf2s
+  let SDf2 sum [df2] of ccs
+  set price-f2 check-bounds (price-f2 * (price-f2 ^ 2 + SQf2 * SDf2) / (price-f2 ^ 2 + SQf2 ^ 2))
+
+  let SQi1 sum [output] of pi1s
+  let SDi1 sum [qi1] of (turtle-set pfs pi2s)
+  set price-i1 check-bounds (price-i1 * (price-i1 ^ 2 + SQi1 * SDi1) / (price-i1 ^ 2 + SQi1 ^ 2))
+
+  let SQi2 sum [output] of pi2s
+  let SDi2 sum [qi2] of (turtle-set pfs pi1s)
+  set price-i2 check-bounds (price-i2 * (price-i2 ^ 2 + SQi2 * SDi2) / (price-i2 ^ 2 + SQi2 ^ 2))
+
+  let SQN natural-resources-supply
+  let SDN sum [qn] of wcs
+  set price-n check-bounds (price-n * (price-n ^ 2 + SQN * SDN) / (price-n ^ 2 + SQN ^ 2))
+
+  let SQL workers-per-council * count wcs
+  let SDL sum [ql] of wcs
+  set price-l check-bounds (price-l * (price-l ^ 2 + SQL * SDL) / (price-l ^ 2 + SQL ^ 2))
+end
