@@ -44,6 +44,15 @@ to reset-prices
   set price-l init-price-l
 end
 
+to standardize-prices
+  set init-price-f1 50
+  set init-price-f2 50
+  set init-price-i1 100
+  set init-price-i2 100
+  set init-price-n 50
+  set init-price-l 50
+end
+
 to randomize-prices
   set init-price-f1 25 + random 50
   set init-price-f2 25 + random 50
@@ -671,7 +680,7 @@ INPUTBOX
 548
 269
 init-price-f1
-67
+50
 1
 0
 Number
@@ -682,7 +691,7 @@ INPUTBOX
 634
 269
 init-price-f2
-66
+50
 1
 0
 Number
@@ -693,7 +702,7 @@ INPUTBOX
 960
 269
 init-price-l
-53
+50
 1
 0
 Number
@@ -704,7 +713,7 @@ INPUTBOX
 717
 269
 init-price-i1
-72
+100
 1
 0
 Number
@@ -715,7 +724,7 @@ INPUTBOX
 797
 269
 init-price-i2
-75
+100
 1
 0
 Number
@@ -726,7 +735,7 @@ INPUTBOX
 878
 269
 init-price-n
-84
+50
 1
 0
 Number
@@ -1050,10 +1059,10 @@ mean [consumer-utility] of ccs
 BUTTON
 201
 61
-323
+322
 94
-standard-prices
-set init-price-f1 50\nset init-price-f2 50\nset init-price-i1 100\nset init-price-i2 100\nset init-price-n 50\nset init-price-l 50
+NIL
+standardize-prices
 NIL
 1
 T
@@ -1714,10 +1723,12 @@ setup</setup>
       <value value="100"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="exponent-experiment" repetitions="50" runMetricsEveryStep="false">
-    <setup>randomize-councils
+  <experiment name="council-experiment" repetitions="50" runMetricsEveryStep="false">
+    <setup>standardize-prices
+randomize-councils
 setup</setup>
     <go>go</go>
+    <timeLimit steps="3000"/>
     <metric>final-price 1</metric>
     <metric>final-price 2</metric>
     <metric>input-price 1</metric>
@@ -1740,7 +1751,7 @@ setup</setup>
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init-price-f2">
-      <value value="66"/>
+      <value value="50"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="surplus-threshold">
       <value value="0.01"/>
@@ -1749,19 +1760,19 @@ setup</setup>
       <value value="100"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init-price-n">
-      <value value="84"/>
+      <value value="50"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="price-delta">
       <value value="0.1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init-price-i1">
-      <value value="72"/>
+      <value value="100"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="ce-init">
       <value value="1"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init-price-l">
-      <value value="53"/>
+      <value value="50"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="experiment-number">
       <value value="1"/>
@@ -1770,13 +1781,13 @@ setup</setup>
       <value value="1000"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init-price-f1">
-      <value value="67"/>
+      <value value="50"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="cq-init">
       <value value="10"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="init-price-i2">
-      <value value="75"/>
+      <value value="100"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
