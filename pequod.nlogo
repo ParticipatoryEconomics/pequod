@@ -45,8 +45,8 @@ to reset-prices
 end
 
 to randomize-prices
-  set init-price-f1 25 + random 75
-  set init-price-f2 25 + random 75
+  set init-price-f1 25 + random 50
+  set init-price-f2 25 + random 50
   set init-price-i1 50 + random 75
   set init-price-i2 50 + random 75
   set init-price-n 25 + random 75
@@ -99,22 +99,6 @@ to setup   ;;  var  f1  f2  i1  i2  n1  l1
     set ycor (5 + industry * -10 + product * -5) ;random-pycor
     set shape "factory"
     set color base-color
-
-;    set cn1 random-float .1
-;    set cn2 random-float .1
-;    set ck1 random-float .1
-;    set ck2 random-float .1
-;    set cl1 random-float .1
-;    set cl2 random-float .1
-;    ifelse product = 6 [set ci1 0][set ci1 random-float .1]       ;; no self-inputs
-;    ifelse product = 7 [set ci2 0][set ci2 random-float .1]
-
-;    let cobb (1 - random-float 1.0)
-;    set xe random-float cobb                      ;(.01 + random-float (cobb - .01))
-;    set xn random-float (cobb - xe)
-;    set xl random-float (cobb - xe - xn)
-;    set xi1 random-float (cobb - xe - xn - xl)
-;    set xi2 (cobb - xe - xn - xl - xi1)
     
     set xe .01 ;+ random-float .1
     
@@ -127,10 +111,6 @@ to setup   ;;  var  f1  f2  i1  i2  n1  l1
     set xi1 .2 + random-float .05
     set xi2 .2 + random-float .05
     set input-exponents (list xi1 xi2)
-
-
-;    if product = 2 [set xi2 xi1 + xi2 set xi1 0 set xl xl * .75 set xn xn * .75]
-;    if product = 3 [set xi1 xi1 + xi2 set xi2 0 set xl xl * .75 set xn xn * .75]
 
     set cq cq-init ;7
     set ce ce-init ;1
@@ -179,12 +159,10 @@ end
 
 to propose-f
   produce-final-goods
-;  prod-pf1s
-;  prod-pf2s
 end
 
 to propose-i
-  ifelse try-new? [produce-input-goods] [ prod-pi1s prod-pi2s ]
+  produce-input-goods
 end
 
 to propose-p
@@ -198,15 +176,6 @@ to go
   tick
   check-surpluses
   if threshold-met? [round-prices propose-i propose-f propose-c stop]
-
-;  if wiggle [ask turtles [ rt random 360 fd .1 ]]
-;  if (  (abs surplus-f1 <= surplus-threshold * sum [output] of pf1s)
-;    and (abs surplus-f2 <= surplus-threshold * sum [output] of pf2s)
-;    and (abs surplus-i1 <= surplus-threshold * sum [output] of pi1s)
-;    and (abs surplus-i2 <= surplus-threshold * sum [output] of pi2s)
-;    and (abs surplus-n  <= surplus-threshold * natural-resources-supply)
-;    and (abs surplus-l  <= surplus-threshold * labor-supply)  )
-;      [round-prices propose-i propose-f propose-c stop]
 end
 
 to check-surpluses
@@ -235,8 +204,6 @@ to iterate-plan
   propose-c
   color-wcs
   color-ccs
-  ;ifelse use-plan-B [planning-bureau-2] [planning-bureau]
-  ;planning-bureau-2
   planning-bureau-3
 end
 
@@ -464,30 +431,6 @@ to-report product-price
   if industry = 1 [report input-price product]
 end
 
-
-;;;probably unused reporters below
-
-to-report produce
-  report cq * (qi1 ^ xi1) * (qi2 ^ xi2) * (qn ^ xn) * (ql ^ xl) * (effort ^ xe)
-end
-
-to-report deltas
-  report (list surplus-f1 surplus-f2 surplus-i1 surplus-i2 surplus-n surplus-l)
-end
-
-to normalize-prices
-  set price-f1 1000 * pf1 / pl
-  set price-f2 1000 * pf2 / pl
-  set price-i1 1000 * pi1 / pl
-  set price-i2 1000 * pi2 / pl
-  set price-n 1000 * pn / pl
-  set price-l 1000
-end
-
-to-report normal-price-vector
-  report (list (pf1 / pl)  (pf2 / pl)  (pi1 / pl)  (pi2 / pl)  (pn / pl)  (pl / pl) )
-end
-
 to-report price-list
   report (list final-prices input-prices resource-prices labor-prices )
 end
@@ -521,6 +464,31 @@ end
 to-report space-list [listx]
   report butlast reduce sentence map [(list ? "        ")] listx
 end
+
+
+;;;probably unused reporters below
+
+to-report produce
+  report cq * (qi1 ^ xi1) * (qi2 ^ xi2) * (qn ^ xn) * (ql ^ xl) * (effort ^ xe)
+end
+
+to-report deltas
+  report (list surplus-f1 surplus-f2 surplus-i1 surplus-i2 surplus-n surplus-l)
+end
+
+to normalize-prices
+  set price-f1 1000 * pf1 / pl
+  set price-f2 1000 * pf2 / pl
+  set price-i1 1000 * pi1 / pl
+  set price-i2 1000 * pi2 / pl
+  set price-n 1000 * pn / pl
+  set price-l 1000
+end
+
+to-report normal-price-vector
+  report (list (pf1 / pl)  (pf2 / pl)  (pi1 / pl)  (pi2 / pl)  (pn / pl)  (pl / pl) )
+end
+
 
 ;to-report social-cost
 ;  report item 0 prices * qf1 + item 1 prices * qf2 + item 2 prices * qi1 + item 3 prices * qi2 + item 4 prices * qn + item 5 prices * ql
@@ -1264,17 +1232,6 @@ viewing
 1
 0
 Number
-
-SWITCH
-698
-719
-809
-752
-try-new?
-try-new?
-1
-1
--1000
 
 BUTTON
 114
