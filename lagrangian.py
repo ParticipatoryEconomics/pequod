@@ -39,4 +39,6 @@ for i, j in sols.iteritems():
         js = p.sub(r'ln \1', js)
         p = re.compile(r'\*\*')
         js = p.sub(r'^', js)
+        p = re.compile(r'([*+/^-])')
+        js = p.sub(r' \1 ', js)
         print 'set', i, js, "\n"
