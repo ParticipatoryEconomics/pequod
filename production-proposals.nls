@@ -1,11 +1,13 @@
 
 to produce-final-goods
   ask pfs [
+    ;;;;;;;;;;;;;;;;calculate divisor;;;;;;;;;;;;;;;;
     let D effort-exponent - k
     foreach intermediate-inputs [set D D + k * input-exponent ?]
     foreach resource-types [set D D + k * resource-exponent ?]
     foreach labor-types [set D D + k * labor-exponent ?]    
 
+    ;;;;;;;;;;;;;;;;set intermediate input demands;;;;;;;;;;;;;;;;
     set input-quantities (list)
     foreach intermediate-inputs [
       let I ?
@@ -30,21 +32,7 @@ to produce-final-goods
     set qi1 input-quantity 1
     set qi2 input-quantity 2
 
-
-;    let input-index 1
-;    set qi1 exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * ln input-price input-index) + (k * input-exponent 2 * ln input-price 2) - (k * input-exponent 2 * ln input-price input-index) - (k * resource-exponent 1 * ln input-price input-index) - (k * labor-exponent 1 * ln input-price input-index) - (effort-exponent * ln input-price input-index) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent input-index) + (k * input-exponent 2 * ln input-exponent input-index) + (k * resource-exponent 1 * ln input-exponent input-index) + (k * labor-exponent 1 * ln input-exponent input-index) + (effort-exponent * ln input-exponent input-index) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-;
-;    set input-index 2
-;    set qi2 exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * ln input-price input-index) + (k * input-exponent 1 * ln input-price 1) - (k * input-exponent 1 * ln input-price input-index) - (k * resource-exponent 1 * ln input-price input-index) - (k * labor-exponent 1 * ln input-price input-index) - (effort-exponent * ln input-price input-index) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent input-index) + (k * input-exponent 1 * ln input-exponent input-index) + (k * resource-exponent 1 * ln input-exponent input-index) + (k * labor-exponent 1 * ln input-exponent input-index) + (effort-exponent * ln input-exponent input-index) - (k * input-exponent 1 * ln input-exponent 1) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-
-;    set qn exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * ln resource-price 1) - (k * input-exponent 1 * ln resource-price 1) - (k * input-exponent 2 * ln resource-price 1) - (k * labor-exponent 1 * ln resource-price 1) - (effort-exponent * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * ln resource-exponent 1) + (k * input-exponent 1 * ln resource-exponent 1) + (k * input-exponent 2 * ln resource-exponent 1) + (k * labor-exponent 1 * ln resource-exponent 1) + (effort-exponent * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-
+    ;;;;;;;;;;;;;;;;set resource demands;;;;;;;;;;;;;;;;
     set resource-quantities (list)
     foreach resource-types [
       let I ?
@@ -68,14 +56,7 @@ to produce-final-goods
     
     set qn resource-quantity 1
     
-;    set resource-quantities (list qn)
-
-
-;    set ql exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * ln labor-price 1) - (k * input-exponent 1 * ln labor-price 1) - (k * input-exponent 2 * ln labor-price 1) - (k * resource-exponent 1 * ln labor-price 1) - (effort-exponent * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * ln labor-exponent 1) + (k * input-exponent 1 * ln labor-exponent 1) + (k * input-exponent 2 * ln labor-exponent 1) + (k * resource-exponent 1 * ln labor-exponent 1) + (effort-exponent * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-;
-
+    ;;;;;;;;;;;;;;;;set labor demands;;;;;;;;;;;;;;;;
     set labor-quantities (list)
     foreach labor-types [
       let I ?
@@ -99,13 +80,7 @@ to produce-final-goods
     
     set ql labor-quantity 1
 
-;    set labor-quantities (list ql)
-
-
-;    set effort exp (
-;(- ln A + (ln k) - (input-exponent 1 * ln k) - (input-exponent 2 * ln k) - (resource-exponent 1 * ln k) - (labor-exponent 1 * ln k) - (ln product-price ) + (input-exponent 1 * ln input-price 1)  + (input-exponent 2 * ln input-price 2)  + (labor-exponent 1 * ln labor-price 1)  + (resource-exponent 1 * ln resource-price 1) + (ln S ) - (input-exponent 1 * ln S ) - (input-exponent 2 * ln S ) - (resource-exponent 1 * ln S ) - (labor-exponent 1 * ln S ) - (input-exponent 1 * ln input-exponent 1) - (input-exponent 2 * ln input-exponent 2) - (resource-exponent 1 * ln resource-exponent 1) - (labor-exponent 1 * ln labor-exponent 1) - (ln effort-exponent) + (input-exponent 1 * ln effort-exponent) + (input-exponent 2 * ln effort-exponent) + (resource-exponent 1 * ln effort-exponent) + (labor-exponent 1 * ln effort-exponent)
-;) / denominator )
-
+    ;;;;;;;;;;;;;;;;set effort;;;;;;;;;;;;;;;;
     let N ( - ln A - ln product-price - ln effort-exponent + ln k + ln S )
     foreach intermediate-inputs [
       let J ?
@@ -121,11 +96,7 @@ to produce-final-goods
     ]
     set effort exp (N / D)
 
-
-;    set output exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * input-exponent 1 * ln product-price ) - (k * input-exponent 2 * ln product-price ) - (k * resource-exponent 1 * ln product-price ) - (k * labor-exponent 1 * ln product-price ) - (effort-exponent * ln product-price ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln product-price ) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-    
+    ;;;;;;;;;;;;;;;;set output;;;;;;;;;;;;;;;;
     let M (- ln A)
     foreach intermediate-inputs [
       let J ?
@@ -142,150 +113,46 @@ to produce-final-goods
     set M k * M + effort-exponent * ( ln k + ln S - ln effort-exponent - ln product-price )
 
     set output check-bounds exp (M / D)
-
-;    if who = 100 [show (list exp (M / D) output produce)]
-
-;    if who = 100 [
-;    show input-quantities
-;    show resource-quantities
-;    show labor-quantities
-;    show effort ]
-
-  ]
-end
-
-to-report denominator
-  report (- k + k * input-exponent 1 + k * input-exponent 2 + k * resource-exponent 1 + k * labor-exponent 1 + effort-exponent )
-end
-
-to prod-pf1s
-  ask pf1s [
-    set qf1 exp (
-(- k * ln A + (effort-exponent * ln k) - (k * input-exponent 1 * ln final-price 1 ) - (k * input-exponent 2 * ln final-price 1 ) - (k * resource-exponent 1 * ln final-price 1 ) - (k * labor-exponent 1 * ln final-price 1 ) - (effort-exponent * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln final-price 1 ) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-    set qi1 exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * ln input-price 1) - (k * input-exponent 2 * ln input-price 1) - (k * resource-exponent 1 * ln input-price 1) - (k * labor-exponent 1 * ln input-price 1) - (effort-exponent * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent 1) + (k * input-exponent 2 * ln input-exponent 1) + (k * resource-exponent 1 * ln input-exponent 1) + (k * labor-exponent 1 * ln input-exponent 1) + (effort-exponent * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-    set qi2 exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * ln input-price 2) - (k * input-exponent 1 * ln input-price 2) - (k * resource-exponent 1 * ln input-price 2) - (k * labor-exponent 1 * ln input-price 2) - (effort-exponent * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * ln input-exponent 2) + (k * input-exponent 1 * ln input-exponent 2) + (k * resource-exponent 1 * ln input-exponent 2) + (k * labor-exponent 1 * ln input-exponent 2) + (effort-exponent * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-
-    set qn exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * ln resource-price 1) - (k * input-exponent 1 * ln resource-price 1) - (k * input-exponent 2 * ln resource-price 1) - (k * labor-exponent 1 * ln resource-price 1) - (effort-exponent * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * ln resource-exponent 1) + (k * input-exponent 1 * ln resource-exponent 1) + (k * input-exponent 2 * ln resource-exponent 1) + (k * labor-exponent 1 * ln resource-exponent 1) + (effort-exponent * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-
-    set ql exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * ln labor-price 1) - (k * input-exponent 1 * ln labor-price 1) - (k * input-exponent 2 * ln labor-price 1) - (k * resource-exponent 1 * ln labor-price 1) - (effort-exponent * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * ln labor-exponent 1) + (k * input-exponent 1 * ln labor-exponent 1) + (k * input-exponent 2 * ln labor-exponent 1) + (k * resource-exponent 1 * ln labor-exponent 1) + (effort-exponent * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-    set effort exp (
-(- ln A + (ln k) - (input-exponent 1 * ln k) - (input-exponent 2 * ln k) - (resource-exponent 1 * ln k) - (labor-exponent 1 * ln k) - (ln final-price 1 ) + (input-exponent 1 * ln input-price 1)  + (input-exponent 2 * ln input-price 2)  + (labor-exponent 1 * ln labor-price 1)  + (resource-exponent 1 * ln resource-price 1) + (ln S ) - (input-exponent 1 * ln S ) - (input-exponent 2 * ln S ) - (resource-exponent 1 * ln S ) - (labor-exponent 1 * ln S ) - (input-exponent 1 * ln input-exponent 1) - (input-exponent 2 * ln input-exponent 2) - (resource-exponent 1 * ln resource-exponent 1) - (labor-exponent 1 * ln labor-exponent 1) - (ln effort-exponent) + (input-exponent 1 * ln effort-exponent) + (input-exponent 2 * ln effort-exponent) + (resource-exponent 1 * ln effort-exponent) + (labor-exponent 1 * ln effort-exponent)
-) / denominator )
-
-    set input-quantities (list qi1 qi2)
-    set resource-quantities (list qn)
-    set labor-quantities (list ql)
-
-    set output check-bounds qf1
     
-;    if who = 100 [
-;    show input-quantities
-;    show resource-quantities
-;    show labor-quantities
-;    show effort ]
   ]
 end
 
-to prod-pf2s
-  ask pf2s [
-    set qf2 exp (
-(- k * ln A + (effort-exponent * ln k) - (k * input-exponent 1 * ln final-price 2 ) - (k * input-exponent 2 * ln final-price 2 ) - (k * resource-exponent 1 * ln final-price 2 ) - (k * labor-exponent 1 * ln final-price 2 ) - (effort-exponent * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln final-price 2 ) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-    set qi1 exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * ln input-price 1) - (k * input-exponent 2 * ln input-price 1) - (k * resource-exponent 1 * ln input-price 1) - (k * labor-exponent 1 * ln input-price 1) - (effort-exponent * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent 1) + (k * input-exponent 2 * ln input-exponent 1) + (k * resource-exponent 1 * ln input-exponent 1) + (k * labor-exponent 1 * ln input-exponent 1) + (effort-exponent * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-    set qi2 exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * ln input-price 2) - (k * input-exponent 1 * ln input-price 2) - (k * resource-exponent 1 * ln input-price 2) - (k * labor-exponent 1 * ln input-price 2) - (effort-exponent * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * ln input-exponent 2) + (k * input-exponent 1 * ln input-exponent 2) + (k * resource-exponent 1 * ln input-exponent 2) + (k * labor-exponent 1 * ln input-exponent 2) + (effort-exponent * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-
-    set qn exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * ln resource-price 1) - (k * input-exponent 1 * ln resource-price 1) - (k * input-exponent 2 * ln resource-price 1) - (k * labor-exponent 1 * ln resource-price 1) - (effort-exponent * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * ln resource-exponent 1) + (k * input-exponent 1 * ln resource-exponent 1) + (k * input-exponent 2 * ln resource-exponent 1) + (k * labor-exponent 1 * ln resource-exponent 1) + (effort-exponent * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-
-    set ql exp (
-(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * ln labor-price 1) - (k * input-exponent 1 * ln labor-price 1) - (k * input-exponent 2 * ln labor-price 1) - (k * resource-exponent 1 * ln labor-price 1) - (effort-exponent * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * ln labor-exponent 1) + (k * input-exponent 1 * ln labor-exponent 1) + (k * input-exponent 2 * ln labor-exponent 1) + (k * resource-exponent 1 * ln labor-exponent 1) + (effort-exponent * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-) / denominator )
-
-    set effort exp (
-(- ln A + (ln k) - (input-exponent 1 * ln k) - (input-exponent 2 * ln k) - (resource-exponent 1 * ln k) - (labor-exponent 1 * ln k) - (ln final-price 2 ) + (input-exponent 1 * ln input-price 1)  + (input-exponent 2 * ln input-price 2)  + (labor-exponent 1 * ln labor-price 1)  + (resource-exponent 1 * ln resource-price 1) + (ln S ) - (input-exponent 1 * ln S ) - (input-exponent 2 * ln S ) - (resource-exponent 1 * ln S ) - (labor-exponent 1 * ln S ) - (input-exponent 1 * ln input-exponent 1) - (input-exponent 2 * ln input-exponent 2) - (resource-exponent 1 * ln resource-exponent 1) - (labor-exponent 1 * ln labor-exponent 1) - (ln effort-exponent) + (input-exponent 1 * ln effort-exponent) + (input-exponent 2 * ln effort-exponent) + (resource-exponent 1 * ln effort-exponent) + (labor-exponent 1 * ln effort-exponent)
-) / denominator )
-
-    set input-quantities (list qi1 qi2)
-    set resource-quantities (list qn)
-    set labor-quantities (list ql)
-
-    set output check-bounds qf2
-  ]
-end
-
-
-
-to produce-input-goods                           ;;this is not working yet
+to produce-input-goods                           
   ask pis [
     let D effort-exponent - k
-    let other-inputs remove product intermediate-inputs
-    foreach other-inputs [set D D + k * input-exponent ?]
+;    let other-inputs remove product intermediate-inputs
+;    foreach other-inputs [set D D + k * input-exponent ?]
     foreach resource-types [set D D + k * resource-exponent ?]
     foreach labor-types [set D D + k * labor-exponent ?]    
 
-    set input-quantities (list)
-    foreach intermediate-inputs [
-      let I ?
-      ifelse I = product
-        [ set input-quantities lput 0 input-quantities ] 
-        [ let N (- k * (ln A + ln product-price - ln input-price I + ln input-exponent I) )
-          let other-other-inputs remove ? other-inputs
-          foreach other-other-inputs [
-            let J ?
-            set N N + ( k * input-exponent J * ( ln input-price J - ln input-exponent J - ln input-price I + ln input-exponent I ) )
-            ]
-          foreach resource-types [
-            let J ?
-            set N N + ( k * resource-exponent J * ( ln resource-price J - ln resource-exponent J - ln input-price I + ln input-exponent I ) )
-            ]
-          foreach labor-types [
-            let J ?
-            set N N + ( k * labor-exponent J * ( ln labor-price J - ln labor-exponent J - ln input-price I + ln input-exponent I ) )
-            ]
-          set N N + ( effort-exponent * ( ln k + ln S - ln effort-exponent - ln input-price I + ln input-exponent I ) )
-        set input-quantities lput exp (N / D) input-quantities
-      ]
-    ]
-    ifelse product = 1 [set qi1 0][set qi1 input-quantity 1]
-    ifelse product = 2 [set qi2 0][set qi2 input-quantity 2]
-
-;    let input-index 1
-;    set qi1 exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * ln input-price input-index) + (k * input-exponent 2 * ln input-price 2) - (k * input-exponent 2 * ln input-price input-index) - (k * resource-exponent 1 * ln input-price input-index) - (k * labor-exponent 1 * ln input-price input-index) - (effort-exponent * ln input-price input-index) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent input-index) + (k * input-exponent 2 * ln input-exponent input-index) + (k * resource-exponent 1 * ln input-exponent input-index) + (k * labor-exponent 1 * ln input-exponent input-index) + (effort-exponent * ln input-exponent input-index) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-;
-;    set input-index 2
-;    set qi2 exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * ln input-price input-index) + (k * input-exponent 1 * ln input-price 1) - (k * input-exponent 1 * ln input-price input-index) - (k * resource-exponent 1 * ln input-price input-index) - (k * labor-exponent 1 * ln input-price input-index) - (effort-exponent * ln input-price input-index) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent input-index) + (k * input-exponent 1 * ln input-exponent input-index) + (k * resource-exponent 1 * ln input-exponent input-index) + (k * labor-exponent 1 * ln input-exponent input-index) + (effort-exponent * ln input-exponent input-index) - (k * input-exponent 1 * ln input-exponent 1) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-
-;    set qn exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * ln resource-price 1) - (k * input-exponent 1 * ln resource-price 1) - (k * input-exponent 2 * ln resource-price 1) - (k * labor-exponent 1 * ln resource-price 1) - (effort-exponent * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * ln resource-exponent 1) + (k * input-exponent 1 * ln resource-exponent 1) + (k * input-exponent 2 * ln resource-exponent 1) + (k * labor-exponent 1 * ln resource-exponent 1) + (effort-exponent * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-
+;    set input-quantities (list)
+;    foreach intermediate-inputs [
+;      let I ?
+;      ifelse I = product
+;        [ set input-quantities lput 0 input-quantities ] 
+;        [ let N (- k * (ln A + ln product-price - ln input-price I + ln input-exponent I) )
+;;          let other-other-inputs remove ? other-inputs
+;;          foreach other-other-inputs [
+;;            let J ?
+;;            set N N + ( k * input-exponent J * ( ln input-price J - ln input-exponent J - ln input-price I + ln input-exponent I ) )
+;;            ]
+;          foreach resource-types [
+;            let J ?
+;            set N N + ( k * resource-exponent J * ( ln resource-price J - ln resource-exponent J - ln input-price I + ln input-exponent I ) )
+;            ]
+;          foreach labor-types [
+;            let J ?
+;            set N N + ( k * labor-exponent J * ( ln labor-price J - ln labor-exponent J - ln input-price I + ln input-exponent I ) )
+;            ]
+;          set N N + ( effort-exponent * ( ln k + ln S - ln effort-exponent - ln input-price I + ln input-exponent I ) )
+;        set input-quantities lput exp (N / D) input-quantities
+;      ]
+;    ]
+;    ifelse product = 1 [set qi1 0][set qi1 input-quantity 1]
+;    ifelse product = 2 [set qi2 0][set qi2 input-quantity 2]
+    set input-quantities (list 0 0)
+    
+    ;;;;;;;;;;;;;;;;set resource demands;;;;;;;;;;;;;;;;
     set resource-quantities (list)
     foreach resource-types [
       let I ?
@@ -295,10 +162,10 @@ to produce-input-goods                           ;;this is not working yet
         let J ?
         set N N + ( k * resource-exponent J * ( ln resource-price J - ln resource-exponent J - ln resource-price I + ln resource-exponent I ) )
       ]
-      foreach other-inputs [
-        let J ?
-        set N N + ( k * input-exponent J * ( ln input-price J - ln input-exponent J - ln resource-price I + ln resource-exponent I ) )
-      ]
+;      foreach other-inputs [
+;        let J ?
+;        set N N + ( k * input-exponent J * ( ln input-price J - ln input-exponent J - ln resource-price I + ln resource-exponent I ) )
+;      ]
       foreach labor-types [
         let J ?
         set N N + ( k * labor-exponent J * ( ln labor-price J - ln labor-exponent J - ln resource-price I + ln resource-exponent I ) )
@@ -308,15 +175,9 @@ to produce-input-goods                           ;;this is not working yet
     ]
     
     set qn resource-quantity 1
-    
-;    set resource-quantities (list qn)
 
 
-;    set ql exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * ln product-price ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * ln labor-price 1) - (k * input-exponent 1 * ln labor-price 1) - (k * input-exponent 2 * ln labor-price 1) - (k * resource-exponent 1 * ln labor-price 1) - (effort-exponent * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * ln labor-exponent 1) + (k * input-exponent 1 * ln labor-exponent 1) + (k * input-exponent 2 * ln labor-exponent 1) + (k * resource-exponent 1 * ln labor-exponent 1) + (effort-exponent * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-;
-
+    ;;;;;;;;;;;;;;;;set labor demands;;;;;;;;;;;;;;;;
     set labor-quantities (list)
     foreach labor-types [
       let I ?
@@ -326,10 +187,10 @@ to produce-input-goods                           ;;this is not working yet
         let J ?
         set N N + ( k * labor-exponent J * ( ln labor-price J - ln labor-exponent J - ln labor-price I + ln labor-exponent I ) )
       ]
-      foreach other-inputs [
-        let J ?
-        set N N + ( k * input-exponent J * ( ln input-price J - ln input-exponent J - ln labor-price I + ln labor-exponent I ) )
-      ]
+;      foreach other-inputs [
+;        let J ?
+;        set N N + ( k * input-exponent J * ( ln input-price J - ln input-exponent J - ln labor-price I + ln labor-exponent I ) )
+;      ]
       foreach resource-types [
         let J ?
         set N N + ( k * resource-exponent J * ( ln resource-price J - ln resource-exponent J - ln labor-price I + ln labor-exponent I ) )
@@ -340,18 +201,12 @@ to produce-input-goods                           ;;this is not working yet
     
     set ql labor-quantity 1
 
-;    set labor-quantities (list ql)
-
-
-;    set effort exp (
-;(- ln A + (ln k) - (input-exponent 1 * ln k) - (input-exponent 2 * ln k) - (resource-exponent 1 * ln k) - (labor-exponent 1 * ln k) - (ln product-price ) + (input-exponent 1 * ln input-price 1)  + (input-exponent 2 * ln input-price 2)  + (labor-exponent 1 * ln labor-price 1)  + (resource-exponent 1 * ln resource-price 1) + (ln S ) - (input-exponent 1 * ln S ) - (input-exponent 2 * ln S ) - (resource-exponent 1 * ln S ) - (labor-exponent 1 * ln S ) - (input-exponent 1 * ln input-exponent 1) - (input-exponent 2 * ln input-exponent 2) - (resource-exponent 1 * ln resource-exponent 1) - (labor-exponent 1 * ln labor-exponent 1) - (ln effort-exponent) + (input-exponent 1 * ln effort-exponent) + (input-exponent 2 * ln effort-exponent) + (resource-exponent 1 * ln effort-exponent) + (labor-exponent 1 * ln effort-exponent)
-;) / denominator )
-
+    ;;;;;;;;;;;;;;;;set effort;;;;;;;;;;;;;;;;
     let N ( - ln A - ln product-price - ln effort-exponent + ln k + ln S )
-    foreach other-inputs [
-      let J ?
-      set N N + ( input-exponent J * ( ln input-price J - ln input-exponent J + ln effort-exponent - ln k - ln S ) )
-    ]
+;    foreach other-inputs [
+;      let J ?
+;      set N N + ( input-exponent J * ( ln input-price J - ln input-exponent J + ln effort-exponent - ln k - ln S ) )
+;    ]
     foreach resource-types [
       let J ?
       set N N + ( resource-exponent J * ( ln resource-price J - ln resource-exponent J + ln effort-exponent - ln k - ln S ) )
@@ -362,16 +217,12 @@ to produce-input-goods                           ;;this is not working yet
     ]
     set effort exp (N / D)
 
-
-;    set output exp (
-;(- k * ln A + (effort-exponent * ln k) - (k * input-exponent 1 * ln product-price ) - (k * input-exponent 2 * ln product-price ) - (k * resource-exponent 1 * ln product-price ) - (k * labor-exponent 1 * ln product-price ) - (effort-exponent * ln product-price ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln product-price ) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
-;) / denominator )
-    
-    let M (ln A)
-    foreach other-inputs [
-      let J ?
-      set M M + ( input-exponent J * ( ln input-price J - ln input-exponent J - ln product-price ) )
-    ]
+    ;;;;;;;;;;;;;;;;set output;;;;;;;;;;;;;;;;
+    let M (- ln A)
+;    foreach other-inputs [
+;      let J ?
+;      set M M + ( input-exponent J * ( ln input-price J - ln input-exponent J - ln product-price ) )
+;    ]
     foreach resource-types [
       let J ?
       set M M + ( resource-exponent J * ( ln resource-price J - ln resource-exponent J - ln product-price ) )
@@ -384,65 +235,136 @@ to produce-input-goods                           ;;this is not working yet
 
     set output check-bounds exp (M / D)
 
-;    if who = 100 [show (list exp (M / D) output produce)]
-
-;    if who = 100 [
-;    show input-quantities
-;    show resource-quantities
-;    show labor-quantities
-;    show effort ]
-
   ]
 end
 
-;to-report input-denominator
+
+;to-report denominator
 ;  report (- k + k * input-exponent 1 + k * input-exponent 2 + k * resource-exponent 1 + k * labor-exponent 1 + effort-exponent )
 ;end
-
-to prod-pi1s
-  ask pi1s [
-   set qi1 exp (
-     (- k * ln A + effort-exponent * ln k - k * resource-exponent 1 * ln input-price 1 - k * labor-exponent 1 * ln input-price 1 - effort-exponent * ln input-price 1 + k * labor-exponent 1 * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
-   
-   set qn exp (
-     (- k * ln A + effort-exponent * ln k - k * ln input-price 1 + k * labor-exponent 1 * ln labor-price 1 + k * ln resource-price 1 - k * labor-exponent 1 * ln resource-price 1 - effort-exponent * ln resource-price 1 + effort-exponent * ln S - k * ln resource-exponent 1 + k * labor-exponent 1 * ln resource-exponent 1 + effort-exponent * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
-   
-   set ql exp (
-     (- k * ln A + effort-exponent * ln k - k * ln input-price 1 + k * ln labor-price 1 - k * resource-exponent 1 * ln labor-price 1 - effort-exponent * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * ln labor-exponent 1 + k * resource-exponent 1 * ln labor-exponent 1 + effort-exponent * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
-   
-   set effort (
-     (- ln A + ln k - resource-exponent 1 * ln k - labor-exponent 1 * ln k - ln input-price 1 + labor-exponent 1 * ln labor-price 1 + resource-exponent 1 * ln resource-price 1 + ln S - resource-exponent 1 * ln S - labor-exponent 1 * ln S - resource-exponent 1 * ln resource-exponent 1 - labor-exponent 1 * ln labor-exponent 1 - ln effort-exponent + resource-exponent 1 * ln effort-exponent + labor-exponent 1 * ln effort-exponent) / denominator-is )
-   
-   set output check-bounds qi1
-   set input-quantities (list 0 0) ;replace-item 0 input-quantities qi1
-   set resource-quantities (list qn)
-   set labor-quantities (list ql)
-   set qi1 0
-  ]
-end
-
-to prod-pi2s
-  ask pi2s [
-   set qi2 exp (
-     (- k * ln A + effort-exponent * ln k - k * resource-exponent 1 * ln input-price 2 - k * labor-exponent 1 * ln input-price 2 - effort-exponent * ln input-price 2 + k * labor-exponent 1 * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
-   
-   set qn exp (
-     (- k * ln A + effort-exponent * ln k - k * ln input-price 2 + k * labor-exponent 1 * ln labor-price 1 + k * ln resource-price 1 - k * labor-exponent 1 * ln resource-price 1 - effort-exponent * ln resource-price 1 + effort-exponent * ln S - k * ln resource-exponent 1 + k * labor-exponent 1 * ln resource-exponent 1 + effort-exponent * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
-   
-   set ql exp (
-     (- k * ln A + effort-exponent * ln k - k * ln input-price 2 + k * ln labor-price 1 - k * resource-exponent 1 * ln labor-price 1 - effort-exponent * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * ln labor-exponent 1 + k * resource-exponent 1 * ln labor-exponent 1 + effort-exponent * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
-   
-   set effort (
-     (- ln A + ln k - resource-exponent 1 * ln k - labor-exponent 1 * ln k - ln input-price 2 + labor-exponent 1 * ln labor-price 1 + resource-exponent 1 * ln resource-price 1 + ln S - resource-exponent 1 * ln S - labor-exponent 1 * ln S - resource-exponent 1 * ln resource-exponent 1 - labor-exponent 1 * ln labor-exponent 1 - ln effort-exponent + resource-exponent 1 * ln effort-exponent + labor-exponent 1 * ln effort-exponent) / denominator-is )
-   
-   set output check-bounds qi2
-   set input-quantities (list 0 0) ;replace-item 1 input-quantities qi2
-   set resource-quantities (list qn)
-   set labor-quantities (list ql)
-   set qi2 0
-  ]
-end
-
-to-report denominator-is
-  report (- k + k * resource-exponent 1 + k * labor-exponent 1 + effort-exponent )
-end
+;
+;to prod-pf1s
+;  ask pf1s [
+;    set qf1 exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * input-exponent 1 * ln final-price 1 ) - (k * input-exponent 2 * ln final-price 1 ) - (k * resource-exponent 1 * ln final-price 1 ) - (k * labor-exponent 1 * ln final-price 1 ) - (effort-exponent * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln final-price 1 ) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;    set qi1 exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * ln input-price 1) - (k * input-exponent 2 * ln input-price 1) - (k * resource-exponent 1 * ln input-price 1) - (k * labor-exponent 1 * ln input-price 1) - (effort-exponent * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent 1) + (k * input-exponent 2 * ln input-exponent 1) + (k * resource-exponent 1 * ln input-exponent 1) + (k * labor-exponent 1 * ln input-exponent 1) + (effort-exponent * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;    set qi2 exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * ln input-price 2) - (k * input-exponent 1 * ln input-price 2) - (k * resource-exponent 1 * ln input-price 2) - (k * labor-exponent 1 * ln input-price 2) - (effort-exponent * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * ln input-exponent 2) + (k * input-exponent 1 * ln input-exponent 2) + (k * resource-exponent 1 * ln input-exponent 2) + (k * labor-exponent 1 * ln input-exponent 2) + (effort-exponent * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;
+;    set qn exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * ln resource-price 1) - (k * input-exponent 1 * ln resource-price 1) - (k * input-exponent 2 * ln resource-price 1) - (k * labor-exponent 1 * ln resource-price 1) - (effort-exponent * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * ln resource-exponent 1) + (k * input-exponent 1 * ln resource-exponent 1) + (k * input-exponent 2 * ln resource-exponent 1) + (k * labor-exponent 1 * ln resource-exponent 1) + (effort-exponent * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;
+;    set ql exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 1 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * ln labor-price 1) - (k * input-exponent 1 * ln labor-price 1) - (k * input-exponent 2 * ln labor-price 1) - (k * resource-exponent 1 * ln labor-price 1) - (effort-exponent * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * ln labor-exponent 1) + (k * input-exponent 1 * ln labor-exponent 1) + (k * input-exponent 2 * ln labor-exponent 1) + (k * resource-exponent 1 * ln labor-exponent 1) + (effort-exponent * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;    set effort exp (
+;(- ln A + (ln k) - (input-exponent 1 * ln k) - (input-exponent 2 * ln k) - (resource-exponent 1 * ln k) - (labor-exponent 1 * ln k) - (ln final-price 1 ) + (input-exponent 1 * ln input-price 1)  + (input-exponent 2 * ln input-price 2)  + (labor-exponent 1 * ln labor-price 1)  + (resource-exponent 1 * ln resource-price 1) + (ln S ) - (input-exponent 1 * ln S ) - (input-exponent 2 * ln S ) - (resource-exponent 1 * ln S ) - (labor-exponent 1 * ln S ) - (input-exponent 1 * ln input-exponent 1) - (input-exponent 2 * ln input-exponent 2) - (resource-exponent 1 * ln resource-exponent 1) - (labor-exponent 1 * ln labor-exponent 1) - (ln effort-exponent) + (input-exponent 1 * ln effort-exponent) + (input-exponent 2 * ln effort-exponent) + (resource-exponent 1 * ln effort-exponent) + (labor-exponent 1 * ln effort-exponent)
+;) / denominator )
+;
+;    set input-quantities (list qi1 qi2)
+;    set resource-quantities (list qn)
+;    set labor-quantities (list ql)
+;
+;    set output check-bounds qf1
+;    
+;;    if who = 100 [
+;;    show input-quantities
+;;    show resource-quantities
+;;    show labor-quantities
+;;    show effort ]
+;  ]
+;end
+;
+;to prod-pf2s
+;  ask pf2s [
+;    set qf2 exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * input-exponent 1 * ln final-price 2 ) - (k * input-exponent 2 * ln final-price 2 ) - (k * resource-exponent 1 * ln final-price 2 ) - (k * labor-exponent 1 * ln final-price 2 ) - (effort-exponent * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln final-price 2 ) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;    set qi1 exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * ln input-price 1) - (k * input-exponent 2 * ln input-price 1) - (k * resource-exponent 1 * ln input-price 1) - (k * labor-exponent 1 * ln input-price 1) - (effort-exponent * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * ln input-exponent 1) + (k * input-exponent 2 * ln input-exponent 1) + (k * resource-exponent 1 * ln input-exponent 1) + (k * labor-exponent 1 * ln input-exponent 1) + (effort-exponent * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;    set qi2 exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * ln input-price 2) - (k * input-exponent 1 * ln input-price 2) - (k * resource-exponent 1 * ln input-price 2) - (k * labor-exponent 1 * ln input-price 2) - (effort-exponent * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * ln input-exponent 2) + (k * input-exponent 1 * ln input-exponent 2) + (k * resource-exponent 1 * ln input-exponent 2) + (k * labor-exponent 1 * ln input-exponent 2) + (effort-exponent * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;
+;    set qn exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * labor-exponent 1 * ln labor-price 1) + (k * ln resource-price 1) - (k * input-exponent 1 * ln resource-price 1) - (k * input-exponent 2 * ln resource-price 1) - (k * labor-exponent 1 * ln resource-price 1) - (effort-exponent * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * ln resource-exponent 1) + (k * input-exponent 1 * ln resource-exponent 1) + (k * input-exponent 2 * ln resource-exponent 1) + (k * labor-exponent 1 * ln resource-exponent 1) + (effort-exponent * ln resource-exponent 1) - (k * labor-exponent 1 * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;
+;    set ql exp (
+;(- k * ln A + (effort-exponent * ln k) - (k * ln final-price 2 ) + (k * input-exponent 1 * ln input-price 1) + (k * input-exponent 2 * ln input-price 2) + (k * ln labor-price 1) - (k * input-exponent 1 * ln labor-price 1) - (k * input-exponent 2 * ln labor-price 1) - (k * resource-exponent 1 * ln labor-price 1) - (effort-exponent * ln labor-price 1) + (k * resource-exponent 1 * ln resource-price 1) + (effort-exponent * ln S ) - (k * input-exponent 1 * ln input-exponent 1) - (k * input-exponent 2 * ln input-exponent 2) - (k * resource-exponent 1 * ln resource-exponent 1) - (k * ln labor-exponent 1) + (k * input-exponent 1 * ln labor-exponent 1) + (k * input-exponent 2 * ln labor-exponent 1) + (k * resource-exponent 1 * ln labor-exponent 1) + (effort-exponent * ln labor-exponent 1) - (effort-exponent * ln effort-exponent)
+;) / denominator )
+;
+;    set effort exp (
+;(- ln A + (ln k) - (input-exponent 1 * ln k) - (input-exponent 2 * ln k) - (resource-exponent 1 * ln k) - (labor-exponent 1 * ln k) - (ln final-price 2 ) + (input-exponent 1 * ln input-price 1)  + (input-exponent 2 * ln input-price 2)  + (labor-exponent 1 * ln labor-price 1)  + (resource-exponent 1 * ln resource-price 1) + (ln S ) - (input-exponent 1 * ln S ) - (input-exponent 2 * ln S ) - (resource-exponent 1 * ln S ) - (labor-exponent 1 * ln S ) - (input-exponent 1 * ln input-exponent 1) - (input-exponent 2 * ln input-exponent 2) - (resource-exponent 1 * ln resource-exponent 1) - (labor-exponent 1 * ln labor-exponent 1) - (ln effort-exponent) + (input-exponent 1 * ln effort-exponent) + (input-exponent 2 * ln effort-exponent) + (resource-exponent 1 * ln effort-exponent) + (labor-exponent 1 * ln effort-exponent)
+;) / denominator )
+;
+;    set input-quantities (list qi1 qi2)
+;    set resource-quantities (list qn)
+;    set labor-quantities (list ql)
+;
+;    set output check-bounds qf2
+;  ]
+;end
+;
+;to prod-pi1s
+;  ask pi1s [
+;   set qi1 exp (
+;     (- k * ln A + effort-exponent * ln k - k * resource-exponent 1 * ln input-price 1 - k * labor-exponent 1 * ln input-price 1 - effort-exponent * ln input-price 1 + k * labor-exponent 1 * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
+;   
+;   set qn exp (
+;     (- k * ln A + effort-exponent * ln k - k * ln input-price 1 + k * labor-exponent 1 * ln labor-price 1 + k * ln resource-price 1 - k * labor-exponent 1 * ln resource-price 1 - effort-exponent * ln resource-price 1 + effort-exponent * ln S - k * ln resource-exponent 1 + k * labor-exponent 1 * ln resource-exponent 1 + effort-exponent * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
+;   
+;   set ql exp (
+;     (- k * ln A + effort-exponent * ln k - k * ln input-price 1 + k * ln labor-price 1 - k * resource-exponent 1 * ln labor-price 1 - effort-exponent * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * ln labor-exponent 1 + k * resource-exponent 1 * ln labor-exponent 1 + effort-exponent * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
+;   
+;   set effort (
+;     (- ln A + ln k - resource-exponent 1 * ln k - labor-exponent 1 * ln k - ln input-price 1 + labor-exponent 1 * ln labor-price 1 + resource-exponent 1 * ln resource-price 1 + ln S - resource-exponent 1 * ln S - labor-exponent 1 * ln S - resource-exponent 1 * ln resource-exponent 1 - labor-exponent 1 * ln labor-exponent 1 - ln effort-exponent + resource-exponent 1 * ln effort-exponent + labor-exponent 1 * ln effort-exponent) / denominator-is )
+;   
+;   set output check-bounds qi1
+;   set input-quantities (list 0 0) ;replace-item 0 input-quantities qi1
+;   set resource-quantities (list qn)
+;   set labor-quantities (list ql)
+;   set qi1 0
+;  ]
+;end
+;
+;to prod-pi2s
+;  ask pi2s [
+;   set qi2 exp (
+;     (- k * ln A + effort-exponent * ln k - k * resource-exponent 1 * ln input-price 2 - k * labor-exponent 1 * ln input-price 2 - effort-exponent * ln input-price 2 + k * labor-exponent 1 * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
+;   
+;   set qn exp (
+;     (- k * ln A + effort-exponent * ln k - k * ln input-price 2 + k * labor-exponent 1 * ln labor-price 1 + k * ln resource-price 1 - k * labor-exponent 1 * ln resource-price 1 - effort-exponent * ln resource-price 1 + effort-exponent * ln S - k * ln resource-exponent 1 + k * labor-exponent 1 * ln resource-exponent 1 + effort-exponent * ln resource-exponent 1 - k * labor-exponent 1 * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
+;   
+;   set ql exp (
+;     (- k * ln A + effort-exponent * ln k - k * ln input-price 2 + k * ln labor-price 1 - k * resource-exponent 1 * ln labor-price 1 - effort-exponent * ln labor-price 1 + k * resource-exponent 1 * ln resource-price 1 + effort-exponent * ln S - k * resource-exponent 1 * ln resource-exponent 1 - k * ln labor-exponent 1 + k * resource-exponent 1 * ln labor-exponent 1 + effort-exponent * ln labor-exponent 1 - effort-exponent * ln effort-exponent) / denominator-is )
+;   
+;   set effort (
+;     (- ln A + ln k - resource-exponent 1 * ln k - labor-exponent 1 * ln k - ln input-price 2 + labor-exponent 1 * ln labor-price 1 + resource-exponent 1 * ln resource-price 1 + ln S - resource-exponent 1 * ln S - labor-exponent 1 * ln S - resource-exponent 1 * ln resource-exponent 1 - labor-exponent 1 * ln labor-exponent 1 - ln effort-exponent + resource-exponent 1 * ln effort-exponent + labor-exponent 1 * ln effort-exponent) / denominator-is )
+;   
+;   set output check-bounds qi2
+;   set input-quantities (list 0 0) ;replace-item 1 input-quantities qi2
+;   set resource-quantities (list qn)
+;   set labor-quantities (list ql)
+;   set qi2 0
+;  ]
+;end
+;
+;to-report denominator-is
+;  report (- k + k * resource-exponent 1 + k * labor-exponent 1 + effort-exponent )
+;end
