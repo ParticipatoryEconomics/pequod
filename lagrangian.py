@@ -8,28 +8,41 @@
 from sympy import *
 import re
 
-l1, n1, q1, q3, q4, ef, p1, p3, p4, pn, pl, S, k, A, xa, xb, xc, xd, xe = symbols('l1 n1 q1 q3 q4 ef p1 p3 p4 pn pl S k A xa xb xc xd xe');
+l1, n1, ef, q1, p1, pn, pl, S, k, A, xe, xn, xl, lam = symbols('l1, n1, ef, q1, p1, pn, pl, S, k, A, xe, xn, xl, lam')
 
 P, D, f, g, gradf, gradg = symbols('P D f g gradf gradg'); #cls=Function);
 
-P = p1 * q1 - (p3 * q3 + p4 * q4 + pn * n1 + pl * l1); # production function
-D = -S * ef**k; # disutility of effort
-f = P + D;
-g = q1 - A * q3**xa * q4**xb * n1**xc * l1**xd * ef**xe; # constraint
-lam = symbols('lam'); # Lagrange multiplier
+productNum = 2 # number of products...over 5 is very computationally
+               # expensive
+productPrices = symbols('p3:%d'%(productNum+3), seq=True)
+productQuants = symbols('q3:%d'%(productNum+3), seq=True)
+productQuantExps = symbols('x3:%d'%(productNum+3), seq=True)
+productSum = 0
+productQuantProd = 1
+toSolveFor = (lam, l1, n1, ef, q1) + productQuants
 
-# test simplify=True
-sols = solve([
-    Eq(f.diff(l1), lam*g.diff(l1)),
-    Eq(f.diff(n1), lam*g.diff(n1)),
-    Eq(f.diff(q1), lam*g.diff(q1)),
-    Eq(f.diff(q3), lam*g.diff(q3)),
-    Eq(f.diff(q4), lam*g.diff(q4)),
-    Eq(f.diff(ef), lam*g.diff(ef)),
-    Eq(g, 0)],
-    l1, n1, q1, q3, q4, ef, lam,
+for i in range(productNum):
+    productSum += productPrices[i] * productQuants[i]
+    productQuantProd *= productQuants[i]**productQuantExps[i]
+
+P = p1 * q1 - (productSum + pn * n1 + pl * l1) # production function
+D = -S * ef**k # disutility of effort
+f = P + D # to optimize
+g = q1 - A * ef**xe * n1**xn * l1**xl * productQuantProd # constraint
+
+
+# set up all the optimization equations, and avoid appending lam, the
+# Lagrangian multiplier
+lagrangianEqs = [Eq(g, 0)]
+for i in range(1, len(toSolveFor)): 
+    lagrangianEqs.append(
+        Eq(f.diff(toSolveFor[i]),
+        lam*g.diff(toSolveFor[i])))
+
+# solve the Lagrangian
+sols = solve(lagrangianEqs, toSolveFor,
     minimal=True, dict=True);
-sols = sols[0];
+sols = sols[0]
 
 # format for NetLogo
 for i, j in sols.iteritems():
