@@ -1292,39 +1292,61 @@ GDP / labor-supply
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+**Participatory Planning Procedure Prototype** (PPPP, AKA _Pequod_)
+
+This Netlogo model is a feasibility study for an aspect of participatory economics, which requires participatory planning in iterations between councils composed of workers and councils composed of consumers. These councils are the agents of the system, and negotiate pricing.
+
+Participatory economics is a model for a new economy based on democracy, justice, and ecological sustainability proposed as an alternative to our current economic system. For an introduction to the primary concepts of Participatory Economics, see [ParticipatoryEconomics.info](http://participatoryeconomics.info), which provides free e-books and other informational materials.
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+The variables, procedures, and reporters of the model are individually documented in the Code tab.
+
+### Agent Rules
+
+A Cobb-Douglas production function lies at the heart of price adjustments. @...
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+### Interface
+
+@...
+
+### Understanding Results
+
+@...
 
 ## THINGS TO NOTICE
 
-(suggested things for the user to notice while running the model)
+### Number of Iterations
+
+Reducing the number of ticks, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that seven ticks is a maximum, corresponding with one week. When exploring the model, take note of what parameter combinations result in the smallest numbers iterations.
+
+### Price Dynamics
+
+Four dynamics have been discovered, but the sources of the dynamics are still not clear. These dynamics are common in models of this type: sinusoidal divergence, direct convergence, @...
 
 ## THINGS TO TRY
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+### Slider Ranges
+
+Surplus thresholds other than 1%. The behaviors noted so far are @...
+
+Price deltas other than 10%. The behaviors noted so far are @...
+
+### Behavior Space Experiments
+
+@...
 
 ## EXTENDING THE MODEL
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
-
-## NETLOGO FEATURES
-
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
-
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
+The largest needs currently are for more industries and more realistic inter-council dynamics. @...
 
 ## CREDITS AND REFERENCES
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+[Github repository](https://github.com/ParticipatoryEconomics/pequod)
+
+[ParticipatoryEconomics.info](http://participatoryeconomics.info) - Provides free e-books and other informational materials on participatory economics
 @#$#@#$#@
 default
 true
