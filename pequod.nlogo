@@ -4,17 +4,14 @@ __includes [ "price-adjustment.nls"
 breed [ccs cc]
 breed [wcs wc]
 
-ccs-own [ effort df1 df2 income                     ;; d - (demand) quantity in C-D utility function
-              cy yf1 yf2                            ;; y - exponent in C-D utility function
-              final-demands ]                          ;; cy - coefficient in C-D utility function
-                                                    
+ccs-own [ effort df1 df2 income
+              cy yf1 yf2
+              final-demands ]
+
 wcs-own [ industry
-          product qf1 qf2 qi1 qi2 qn ql effort      ;; q - quantity in C-D production function 
-          output  xf1 xf2 xi1 xi2 xn xl xe          ;; x - exponent in C-D production function
-          base-color                 cq ce du      ;; cq - coefficient in C-D production function
-                                                    ;; ce - coefficient in C-D disutility of effort
-                                                    ;; du - exponent in C-D disutility of effort
-                                                    ;; (disutility of effort appears in objective function)                                                        
+          product qf1 qf2 qi1 qi2 qn ql effort
+          output  xf1 xf2 xi1 xi2 xn xl xe
+          base-color cq ce du                                             
 
           input-quantities
           resource-quantities
@@ -29,11 +26,12 @@ wcs-own [ industry
           A ]
 
 globals [ prices totals price-f1 price-f2 price-i1 price-i2 price-n price-l
-          surplus-f1 surplus-f2 surplus-i1 surplus-i2 surplus-n surplus-l                 ;total-surplus 
+          surplus-f1 surplus-f2 surplus-i1 surplus-i2 surplus-n surplus-l
           lorenz-points gini-index-reserve
           final-goods intermediate-inputs resource-types labor-types
           final-prices input-prices resource-prices labor-prices
           final-surpluses input-surpluses resource-surpluses labor-surpluses threshold-met? ]
+
 
 to reset-prices
   set price-f1 init-price-f1
@@ -66,9 +64,7 @@ to randomize-councils
   set experiment-number random 99999
 end
 
-
-           ;; item   0   1   2   3   4   5  
-to setup   ;;  var  f1  f2  i1  i2  n1  l1  
+to setup
   ca
   random-seed experiment-number
   reset-prices
@@ -219,7 +215,7 @@ end
 to-report final-demand [x]
   report item (x - 1) final-demands
 end
-  
+ 
 to-report final-producers [x]
   report wcs with [industry = 0 and product = x]
 end
@@ -282,7 +278,7 @@ end
 
 to color-ccs
   ask ccs [
-;    set color scale-color yellow consumer-utility 0 40 ;yellow - 3 + consumer-utility / 2
+    ;set color scale-color yellow consumer-utility 0 40 ;yellow - 3 + consumer-utility / 2
   ]
 end
 
@@ -343,7 +339,9 @@ to-report gini-wealth
   report 100 * effort
 end
 
-to update-lorenz-and-gini  ;; This procedure is borrowed from Uri Wilensky's SugarScape 3 Model in the Social Sciences library
+; Borrowed from Uri Wilensky's SugarScape 3 Model in the Social Sciences library
+;
+to update-lorenz-and-gini
   let num-people count gini-people
   let sorted-wealths sort [gini-wealth] of gini-people
   let total-wealth sum sorted-wealths
@@ -474,8 +472,9 @@ to-report space-list [listx]
   report butlast reduce sentence map [(list ? "        ")] listx
 end
 
-
-;;;probably unused reporters below
+;
+; the three reporters below will probably be deprecated
+;
 
 to-report produce
   report cq * (qi1 ^ xi1) * (qi2 ^ xi2) * (qn ^ xn) * (ql ^ xl) * (effort ^ xe)
