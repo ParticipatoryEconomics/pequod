@@ -1,3 +1,175 @@
+; Participatory Planning Procedure Prototype (PPPP, AKA Pequod)
+;
+; See the Info tab for the model in NetLogo for model purpose,
+; etc. The agents, variables, procedures, and reporters of the model
+; are documented directly below, with some minor information
+; documented within the code.
+;
+; Documentation is in-progress. The text "@..." occurs where more
+; information will be added.
+;
+;
+;
+; @AGENTS
+;
+; The primary agents of the model are councils who negotiate prices.
+; 
+; cc - consumer council
+; wc - worker council
+;
+;
+;
+; @VARIABLES
+;
+; CONSUMER COUNCILS
+;
+; effort        - @...
+; df[N]         - demand quantities in C-D utility function
+; income        - @...
+; cy            - coefficient in C-D utility function
+; yf[N]         - exponents in C-D utility function
+; final-demands - @...
+;
+; WORKER COUNCILS
+;
+; industry       - @...
+; product        - @...
+; qf[N]          - (deprecated) quantities of final goods in C-D production function
+; qi[N]          - (deprecated) quantities of final goods in C-D production function
+; qn             - quantity  of natural resource(s)
+; ql             - quantity of labor resource(s)
+; effort         - @...
+; output         - @...
+; xf[N]          - (deprecated) exponent for final goods in C-D production function
+; xi[N]          - (deprecated) exponent for intermediate goods in C-D production function
+; xn             - exponent for natural resource(s)
+; xl             - exponent for labor resource(s)
+; xe             - exponent for effort
+; cq             - coefficient in C-D production function
+; ce             - coefficient in C-D disutility of effort
+; du             - exponent in C-D disutility of effort (disutility of effort appears in objective function)
+; [P]-quantities - quantities for category P
+; [P]-exponents  - exponents for category P in Cobb-Douglass production function
+; k              - @...
+; S              - @...
+; A              - @...
+;
+; GLOBALS
+;
+; prices              - @...
+; totals              - @...
+; price-f[N]          - (deprecated) @...
+; price-i[N]          - (deprecated) @...
+; price-n             - (deprecated) @...
+; price-l             - (deprecated) @...
+; surplus-f[N]        - (deprecated) @...
+; surplus-i[N]        - (deprecated) @...
+; surplus-n           - (deprecated) @...
+; surplus-l           - (deprecated) @...
+; lorenz-points       - @...
+; gini-index-reserve  - @...
+; final-goods         - @...
+; intermediate-inputs - @...
+; resource-types      - @...
+; labor-types         - @...
+; [P]-prices          - prices for category P from {final, input, resource, labor}
+; [P]-surpluses       - surpluses for category P from {final, input, resource, labor}
+; threshold-met?      - @...
+;
+;
+;
+; @PROCEDURES
+;
+; reset-prices           -
+; standardize-prices     -
+; randomize-prices       -
+; randomize-councils     -
+; setup                  -
+; factory-sort [x]       -
+; propose-c              -
+; propose-f              -
+; propose-i              -
+; propose-p              -
+; go                     -
+; check-surpluses        -
+; iterate-plan           -
+; list-prices            -
+; round-prices           -
+; color-ccs              -
+; color-wcs              -
+; plot-if-small [x]      -
+; update-lorenz-and-gini - 
+; normalize-prices       -
+;
+;
+;
+; @REPORTERS
+;
+; x-sum                 - 
+; consumer-utility      - 
+; GDP                   - 
+; final-demand [x]      - 
+; final-producers [x]   - 
+; input-producers [x]   - 
+; pf1s                  - 
+; pf2s                  - 
+; pfs                   - 
+; pi1s                  - 
+; pi2s                  - 
+; pis                   - 
+; invoice               - 
+; productivity          - 
+; check-bounds [x]      - 
+; labor-supply          - 
+; pf1                   - 
+; pf2                   - 
+; pi1                   - 
+; pi2                   - 
+; pn                    - 
+; pl                    - 
+; gini                  - 
+; gini-people           - 
+; gini-wealth           - 
+; input [x]             - 
+; resource [x]          - 
+; labor [x]             - 
+; final-surplus [x]     - 
+; input-surplus [x]     - 
+; resource-surplus [x]  - 
+; labor-surplus [x]     - 
+; final-price [x]       - 
+; input-price [x]       - 
+; resource-price [x]    - 
+; labor-price [x]       - 
+; input-quantity [x]    - 
+; resource-quantity [x] - 
+; labor-quantity [x]    - 
+; input-exponent [x]    - 
+; resource-exponent [x] - 
+; labor-exponent [x]    - 
+; effort-exponent       - 
+; product-price         - 
+; price-list            - 
+; supply-list           - 
+; demand-list           - 
+; surplus-list          - 
+; percent-surplus-list  - 
+; total-surplus         - 
+; space-list [listx]    - 
+; produce               - 
+; deltas                - 
+; normal-price-vector   - 
+;
+;
+;
+; @INCLUDES
+;
+; price-adjustment.nls     - @...
+; production-proposals.nls - @...
+;
+
+
+
 __includes [ "price-adjustment.nls"
              "production-proposals.nls" ]
 
