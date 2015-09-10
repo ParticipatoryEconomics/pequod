@@ -32,8 +32,8 @@
 ;
 ; WORKER COUNCILS
 ;
-; industry       - @... numerical index only 
-; product        - @... numerical index only
+; industry       - numerical index
+; product        - numerical index
 ; qf[N]          - (deprecated) quantities of final goods in C-D production function; replaced by list
 ; qi[N]          - (deprecated) quantities of final goods in C-D production function; replaced by list
 ; qn             - (deprecated) quantity  of natural resource(s); replaced by list
@@ -1464,21 +1464,29 @@ GDP / labor-supply
 
 **Participatory Planning Procedure Prototype** (PPPP, AKA _Pequod_)
 
-This Netlogo model is a feasibility study for an aspect of participatory economics, which requires participatory planning in iterations between councils composed of workers and councils composed of consumers. These councils are the agents of the system, and negotiate pricing.
+This Netlogo model is a feasibility study for an aspect of participatory economics, which requires participatory economic planning in iterations between councils composed of workers and councils composed of consumers. These councils are the agents of the system. Factory icons represent worker councils and house icons represent consumer councils.
 
-Participatory economics is a model for a new economy based on democracy, justice, and ecological sustainability proposed as an alternative to our current economic system. For an introduction to the primary concepts of Participatory Economics, see [ParticipatoryEconomics.info](http://participatoryeconomics.info), which provides free e-books and other informational materials.
+Participatory economics is a model for a new economy based on democracy, justice, and ecological sustainability proposed as an alternative to current Western economic systems. For an introduction to the primary concepts of Participatory Economics, see [ParticipatoryEconomics.info](http://participatoryeconomics.info), which provides free e-books and other informational materials.
+
+Macroscopic aspects of this Netlogo model are documented here. The variables, procedures, and reporters of the model are individually documented in the Code tab. A number of BehaviorSpace experiments have also been configured, which are documented in the section _How to Use It_.
 
 ## HOW IT WORKS
 
-The variables, procedures, and reporters of the model are individually documented in the Code tab.
+The model centers around planning iterations. During each iteration, worker and consumer councils "negotiate" prices and quantities. The iterations are stopped when demand is within a configurable threshold of the supply for each industry. @...
 
-### Agent Rules
+Some knowledge of microeconomics is useful in exploring with the model, but some basics are explained here.  @... [Explain supply and demand basics.] A Cobb-Douglas production function lies at the heart of adjustments made during each iteration. @... [Explain each variable for ccs and wcs.] [Explain effort, disutility, etc.]
 
-A Cobb-Douglas production function lies at the heart of price adjustments. @...
+@...
 
 ## HOW TO USE IT
 
 ### Interface
+
+The most important aspects of the interface are the graphs of price and quantity histories. If/when the surplus-to-demand threshold is reached and the iterations stop, the number of iterations is the primary quantity of interest, followed by the shape of the graph that led to that equilibrium state. The particular values of each category at which equilibrium was reached are given in the middle of the interface, below the parameter controls.
+
+The model contains more parameters than are accessible in the interface, each of which is documented in the Code tab. The controllable parameters of primary interest to researchers in the model's current state will be those in the middle of the interface. At the bottom of the interface are parameters of interest in exploring performance enhancements.
+
+The experiment number is a control parameter that facilitates pseudo-randomization of model behavior, but in a way that allows replication. That is, while different experiment numbers will produce different behavior, all else being equal, running the model with the same experiment number will always produce the same behavior, allowing interesting behavior to be further explored and shared with colleagues.
 
 @...
 
@@ -1492,31 +1500,47 @@ A Cobb-Douglas production function lies at the heart of price adjustments. @...
 
 Reducing the number of ticks, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that seven ticks is a maximum, corresponding with one week. When exploring the model, take note of what parameter combinations result in the smallest numbers iterations.
 
-### Price Dynamics
+### Price/Quantity Dynamics
 
-Four dynamics have been discovered, but the sources of the dynamics are still not clear. These dynamics are common in models of this type: sinusoidal divergence, direct convergence, @...
+Four dynamics have been discovered, but the sources of the dynamics are still not clear. These dynamics are common in models of this type: sinusoidal divergence, direct convergence, @... [These categories are not accurate...resolve.]
+
+Take note of what gives rise to the known dynamics, and look for new dynamics.
 
 ## THINGS TO TRY
 
-### Slider Ranges
+### Control Parameters
 
-Surplus thresholds other than 1%. The behaviors noted so far are @...
+#### Surplus Threshold
 
-Price deltas other than 10%. The behaviors noted so far are @...
+The behaviors noted so far are @... Take note of @...
+
+#### Price Delta
+
+The behaviors noted so far are @... Take note of @...
+
+#### Initial Price Vector.
+
+The behaviors noted so far are @... Take note of @...
 
 ### Behavior Space Experiments
 
 @...
 
+A primary motivator for the current experiments is in performance analysis. Creating a set of protocols for more meaningful experiments is an objective for future work.
+
 ## EXTENDING THE MODEL
 
 The largest needs currently are for more industries and more realistic inter-council dynamics. @...
 
+There is a need for BehaviorSpace experiments that explore model behavior, instead of just model performance.
+
 ## CREDITS AND REFERENCES
 
-[Github repository](https://github.com/ParticipatoryEconomics/pequod)
+This model is based upon the work of Dr. Robin Hahnel and Michael Albert. Along with Dr. Hahnel, the researchers developing the model's conceptual and computational aspects are Michael Weisdorf, Christan Echt, and Nick Gilla.
 
-[ParticipatoryEconomics.info](http://participatoryeconomics.info) - Provides free e-books and other informational materials on participatory economics
+The model can be shared and modified under the terms of the GPL version 3. The code can be downloaded from and changes submitted to its [Github repository](https://github.com/ParticipatoryEconomics/pequod).
+
+[ParticipatoryEconomics.info](http://participatoryeconomics.info) provides free e-books and other informational materials on participatory economics.
 @#$#@#$#@
 default
 true
