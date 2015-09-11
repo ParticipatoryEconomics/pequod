@@ -1501,23 +1501,25 @@ Macroscopic aspects of this Netlogo model are documented here. The variables, pr
 
 ## HOW IT WORKS
 
-The model centers around planning iterations. During each iteration, worker and consumer councils "negotiate" prices and quantities. The iterations are stopped when demand is within a configurable threshold of the supply for each industry. @...
+The model centers around planning iterations. Worker and consumer councils make proposals concerning what they want to do, based upon current estimates of opportunity and social costs, which are adjusted between each iteration. The iterations stop when demand is within a configurable threshold of the supply for each economic category (industries, resources, etc).
 
-Some knowledge of microeconomics is necessary in order to explore with the model, but some basics are explained here.  @... [Explain supply and demand basics.] A Cobb-Douglas production function lies at the heart of adjustments made during each iteration. @... [Explain each variable for ccs and wcs.] [Explain effort, disutility, etc.]
+Some knowledge of microeconomics is necessary in order to explore with the model, but some basics are explained here.  @... [Explain supply and demand basics.] Cobb-Douglas production/utility functions are assumed, as is common in the literature. [Give formula and brief [Explain effort, disutility, etc.] [Explain difference between ulitiy and production versions.]
 
 @...
 
 ## HOW TO USE IT
 
-#### Graphs
+### Graphs
 
 The most important aspects of the interface are the graphs of price and quantity histories. If/when the surplus threshold is reached and the iterations stop, the number of iterations is the primary quantity of interest, followed by the shape of the graph that led to that equilibrium state. The particular values of each category at which equilibrium was reached are given in the middle of the interface, below the parameter controls.
 
-#### Control Parameters
+### Control Parameters
 
 The model contains more parameters than are accessible in the interface, each of which is documented in the Code tab. The controllable parameters of primary interest to researchers in the model's current state will be those in the middle of the interface. At the bottom of the interface are parameters of interest in exploring performance enhancements, or for debugging purposes.
 
-The experiment number is a control parameter that facilitates pseudo-randomization of model behavior, but in a way that allows replication. That is, while different experiment numbers will produce different behavior, all else being equal, running the model with the same experiment number will always produce the same behavior, allowing interesting behavior to be further explored and shared with colleagues.
+#### Experiment number
+
+This facilitates pseudo-randomization of the initial conditions affecting model behavior and heterogeneity of agents, which facilitates replication of results. That is, _all else being equal_, different experiment numbers produce different behavior, and running the model with the same experiment number will always produce the same behavior, allowing interesting behavior to be further explored and shared with colleagues. If you wish to explore the same initial conditions for varying populations, leave all but the experiment constant, and if you wish to explore changing parameters within the same populuation, change anything but the experiment.
 
 @...
 
@@ -1527,9 +1529,9 @@ The experiment number is a control parameter that facilitates pseudo-randomizati
 
 ## THINGS TO NOTICE
 
-### Number of Iterations
+### Number of Ticks/Iterations
 
-Reducing the number of ticks, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that seven ticks is a maximum, corresponding with one week. When exploring the model, take note of what parameter combinations result in the smallest numbers iterations.
+Reducing the number of ticks, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that approximately seven ticks is a maximum, which makes the processes feasbile for human activity. When exploring the model, take note of what parameter combinations result in the smallest number of ticks.
 
 ### Price/Quantity Dynamics
 
@@ -1543,15 +1545,15 @@ Take note of what gives rise to the known dynamics, and look for new dynamics.
 
 #### Surplus Threshold
 
-The behaviors noted so far are @... Take note of @...
+The behaviors noted so far are @... Take note of @... [larger thresholds result in fewer ticks to "convergence"] [requiring perfect equality is meaningless because the next year's plan starts with parameters resulting in an initial diverence anyway]
 
 #### Price Delta
 
-The behaviors noted so far are @... Take note of @...
+The behaviors noted so far are @... Take note of @... [too small, takes too long, too big, model doesn't converge] [for any given experiment there exists an optimal delta, which leads to convergence in the fewest number of iterations] [current experimental results suggests that values between 0.05 and 0.15 produce this result]
 
 #### Initial Price Vector.
 
-The behaviors noted so far are @... Take note of @...
+The behaviors noted so far are @... Take note of @... [closer to final price vector, fewer ticks]
 
 ### Behavior Space Experiments
 
@@ -1561,13 +1563,23 @@ A primary motivator for the current experiments is in performance analysis. Crea
 
 ## EXTENDING THE MODEL
 
-The largest needs currently are for more industries and more realistic inter-council dynamics. @...
+Increasing the number of councils.
+
+Increasing the number of produced goods, and adding public goods.
+
+Increasing the categories of labor.
+
+Increasing the number of primary resources.
+
+Relaxing convexity conditions on the production and utility functions.
+
+Adding pollutants/externalities.
 
 There is a need for BehaviorSpace experiments that explore model behavior, instead of just model performance.
 
 ## CREDITS AND REFERENCES
 
-This model is based upon the work of Dr. Robin Hahnel and Michael Albert. Along with Dr. Hahnel, the researchers developing the model's conceptual and computational aspects are Michael Weisdorf, Christan Echt, and Nick Gilla.
+This model is based upon the work of Robin Hahnel and Michael Albert on participatory economics. Along with Robin Hahnel, the researchers developing the model's conceptual and computational aspects are Michael Weisdorf, Christan Echt, and Nick Gilla.
 
 The model can be shared and modified under the terms of the GPL version 3. The code can be downloaded from and changes submitted to its [Github repository](https://github.com/ParticipatoryEconomics/pequod).
 
