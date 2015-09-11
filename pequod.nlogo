@@ -12,7 +12,8 @@
 ;
 ; @AGENTS
 ;
-; The primary agents of the model are councils whose collective behavior affects prices and quantities for supply and demand.
+; The primary agents of the model are councils whose collective
+; behavior affects prices and quantities for supply and demand.
 ; 
 ; cc - consumer council
 ; wc - worker council
@@ -23,34 +24,51 @@
 ;
 ; CONSUMER COUNCILS
 ;
-; effort             - allows for differential consumption comensurate with effort; not yet impleted...not currently tied to the effort of the consumers vis-a-vis their worker council
+; effort             - allows for differential consumption comensurate with
+;                      effort; not yet impleted...not currently tied
+;                      to the effort of the consumers vis-a-vis their
+;                      worker council
 ; df[N]              - proposed consumption quantities (demands) of the given good
-; income             - scales effort and acts as a budget constraint in optimizing the utility function
-; cy                 - scalar for entire product in utility function; interpreted as the total factor of utility
-; yf[N]              - exponents in utility function representing the utility elastisticty of consumption of the given good
+; income             - scales effort and acts as a budget constraint in optimizing
+;                      the utility function
+; cy                 - scalar for entire product in utility function; interpreted as
+;                      the total factor of utility
+; yf[N]              - exponents in utility function representing the utility
+;                      elastisticty of consumption of the given good
 ; final-demands      - list of df[N]
-; utility-multiplier - INTERFACE PARAMETER allowing additional zeros to be added to consumer utility; currently unused
+; utility-multiplier - INTERFACE PARAMETER allowing additional zeros
+;                      to be added to consumer utility; currently unused
 ;
 ; WORKER COUNCILS
 ;
-; industry       - numerical index (1 is final and 2 is intermediate); is not industry in the sense of manufacturing, etc
-; product        - numerical index; more like an industry; see product-price reporter for interpretation
+; industry       - numerical index (1 is final and 2 is intermediate); is
+;                  not industry in the sense of manufacturing, etc
+; product        - numerical index; more like an industry; see product-price
+;                  reporter for interpretation
 ; qf[N]          - (obsolete)
 ; qi[N]          - (deprecated) see [P]-quantities
 ; qn             - (deprecated) see [P]-quantities
 ; ql             - (deprecated) see [P]-quantities
-; effort         - scales labor to output; allows consumers who are workers to receive consumption comensurate with effort; not currently tied to the effort of the consumers vis-a-vis their worker council
+; effort         - scales labor to output; allows consumers who are workers to
+;                  receive consumption comensurate with effort; not currently tied to
+;                  the effort of the consumers vis-a-vis their worker council
 ; output         - quantity of the firm's final good
 ; xf[N]          - (obsolete)
 ; xi[N]          - (deprecated) see [P]-exponents
 ; xn             - (deprecated) see [P]-exponents
 ; xl             - (deprecated) see [P]-exponents
 ; xe             - exponent for effort in the production function
-; cq             - scalar for entire product in production function; sometimes interpreted as technology scalar or the total factor of productivity; coefficient in production function; controllable parameter
-; ce             - coefficient in C-D disutility of effort; controllable parameter; interpreted as being related to effort such that if effort is high, and disutility is low, then ; "unpleasentness elastisitcity"
-; du             - exponent in C-D disutility of effort (disutility of effort appears in objective function); controllable parameter
-; [P]-quantities - quantities for category P from {input, resource, labor} (orders for firm)
-; [P]-exponents  - exponents in C-D production function for category P from {input, resource, labor}
+; cq             - scalar for entire product in production function; sometimes
+;                  interpreted as technology scalar or the total factor of
+;                  productivity; coefficient in production function; controllable
+;                  parameter
+; ce             - coefficient for disutility of effort; controllable parameter;
+;                  interpreted as being "unpleasentness elastisitcity"
+; du             - exponent for disutility of effort; controllable parameter
+; [P]-quantities - quantities for category P from {input, resource,
+;                  labor} (orders for firm)
+; [P]-exponents  - exponents in C-D production function for category P
+;                  from {input, resource, labor}
 ; k              - alias for du
 ; S              - alias for ce
 ; A              - alias for cq
@@ -69,13 +87,20 @@
 ; surplus-l           - (deprecated) see [P]-surpluses
 ; lorenz-points       - @...
 ; gini-index-reserve  - @...
-; final-goods         - list of the economy's final goods (currently a numerical index)
-; intermediate-inputs - list of the economy's intermediate goods (currently a numerical index)
-; resource-types      - list of the economy's natural resource categories (currently a numerical index)
-; labor-types         - list of the economy's labor resource categories (currently a numerical index)
-; [P]-prices          - prices for category P from {final, input, resource, labor}
-; [P]-surpluses       - surpluses for category P from {final, input, resource, labor}
-; threshold-met?      - signals end of iterations once equilibrium is obtained
+; final-goods         - list of the economy's final goods (currently a
+;                       numerical index)
+; intermediate-inputs - list of the economy's intermediate goods
+;                       (currently a numerical index)
+; resource-types      - list of the economy's natural resource categories
+;                       (currently a numerical index)
+; labor-types         - list of the economy's labor resource categories
+;                       (currently a numerical index)
+; [P]-prices          - prices for category P from {final, input, resource,
+;                       labor}
+; [P]-surpluses       - surpluses for category P from {final, input,
+;                       resource, labor}
+; threshold-met?      - signals end of iterations once equilibrium is
+;                       obtained
 ;
 ;
 ;
@@ -88,9 +113,9 @@
 ; setup                  - @... 
 ; factory-sort [x]       - (obsolete) @... 
 ; propose-c              - @... 
-; propose-f              - alias for produce-final-goods
+; propose-f              - (deprecated) alias for produce-final-goods
 ; produce-final-goods    - @... 
-; propose-i              - alias for produce-input-goods
+; propose-i              - (deprecated) alias for produce-input-goods
 ; produce-input-goods    - @... 
 ; propose-p              - (obsolete) @... 
 ; go                     - @... 
@@ -100,8 +125,8 @@
 ; round-prices           - @... 
 ; color-ccs              - @... 
 ; color-wcs              - @... 
-; plot-if-small [x]      - @... used in Quantity History graph
-; update-lorenz-and-gini - @... borrowed from Uri Wilensky's SugarScape 3 Model in the Social Sciences library
+; plot-if-small [x]      - used in Quantity History graph; @...
+; update-lorenz-and-gini - @... ; borrowed from Uri Wilensky's SugarScape 3 Model in the Social Sciences library
 ; normalize-prices       - (obsolete) @... 
 ; planning-bureau-3      - @...
 ;
