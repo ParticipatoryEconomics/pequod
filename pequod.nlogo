@@ -12,7 +12,7 @@
 ;
 ; @AGENTS
 ;
-; The primary agents of the model are councils who negotiate prices.
+; The primary agents of the model are councils whose collective behavior affects prices and quantities for supply and demand.
 ; 
 ; cc - consumer council
 ; wc - worker council
@@ -23,30 +23,31 @@
 ;
 ; CONSUMER COUNCILS
 ;
-; effort        - @... currently unused (provides no scaling)
-; df[N]         - demand quantities in C-D utility function
-; income        - @...
-; cy            - coefficient in C-D utility function
-; yf[N]         - exponents in C-D utility function
-; final-demands - @...
+; effort             - allows for differential consumption comensurate with effort; not yet impleted...not currently tied to the effort of the consumers vis-a-vis their worker council
+; df[N]              - proposed consumption quantities (demands) of the given good
+; income             - scales effort and acts as a budget constraint in optimizing the utility function
+; cy                 - scalar for entire product in utility function; interpreted as the total factor of utility
+; yf[N]              - exponents in utility function representing the utility elastisticty of consumption of the given good
+; final-demands      - list of df[N]
+; utility-multiplier - INTERFACE PARAMETER allowing additional zeros to be added to consumer utility; currently unused
 ;
 ; WORKER COUNCILS
 ;
-; industry       - numerical index
-; product        - numerical index
-; qf[N]          - (deprecated) quantities of final goods in C-D production function; replaced by list
-; qi[N]          - (deprecated) quantities of final goods in C-D production function; replaced by list
-; qn             - (deprecated) quantity  of natural resource(s); replaced by list
-; ql             - (deprecated) quantity of labor resource(s); replaced by list
-; effort         - @...
-; output         - @...
-; xf[N]          - (obsolete) exponent for final goods in C-D production function
-; xi[N]          - (deprecated) exponent for intermediate goods in C-D production function; to be replaced by list
-; xn             - (deprecated) exponent for natural resource(s); replaced by list
-; xl             - (deprecated) exponent for labor resource(s); replaced by list
-; xe             - exponent for effort
-; cq             - coefficient in C-D production function; controllable parameter
-; ce             - coefficient in C-D disutility of effort; controllable parameter
+; industry       - numerical index (1 is final and 2 is intermediate); is not industry in the sense of manufacturing, etc
+; product        - numerical index; more like an industry; see product-price reporter for interpretation
+; qf[N]          - (obsolete)
+; qi[N]          - (deprecated) see [P]-quantities
+; qn             - (deprecated) see [P]-quantities
+; ql             - (deprecated) see [P]-quantities
+; effort         - scales labor to output; allows consumers who are workers to receive consumption comensurate with effort; not currently tied to the effort of the consumers vis-a-vis their worker council
+; output         - quantity of the firm's final good
+; xf[N]          - (obsolete)
+; xi[N]          - (deprecated) see [P]-exponents
+; xn             - (deprecated) see [P]-exponents
+; xl             - (deprecated) see [P]-exponents
+; xe             - exponent for effort in the production function
+; cq             - scalar for entire product in production function; sometimes interpreted as technology scalar or the total factor of productivity; coefficient in production function; controllable parameter
+; ce             - coefficient in C-D disutility of effort; controllable parameter; interpreted as being related to effort such that if effort is high, and disutility is low, then ; "unpleasentness elastisitcity"
 ; du             - exponent in C-D disutility of effort (disutility of effort appears in objective function); controllable parameter
 ; [P]-quantities - quantities for category P from {input, resource, labor} (orders for firm)
 ; [P]-exponents  - exponents in C-D production function for category P from {input, resource, labor}
@@ -56,25 +57,25 @@
 ;
 ; GLOBALS
 ;
-; prices              - @...
-; totals              - @...
-; price-f[N]          - (deprecated) @...; to be replaced by list
-; price-i[N]          - (deprecated) @...; to be replaced by list
-; price-n             - (deprecated) @...; to be replaced by list
-; price-l             - (deprecated) @...; to be replaced by list
-; surplus-f[N]        - (deprecated) @...; to be replaced by list
-; surplus-i[N]        - (deprecated) @...; to be replaced by list
-; surplus-n           - (deprecated) @...; to be replaced by list
-; surplus-l           - (deprecated) @...; to be replaced by list
+; prices              - (deprecated)
+; totals              - (deprecated)
+; price-f[N]          - (deprecated) see [P]-prices
+; price-i[N]          - (deprecated) see [P]-prices
+; price-n             - (deprecated) see [P]-prices
+; price-l             - (deprecated) see [P]-prices
+; surplus-f[N]        - (deprecated) see [P]-surpluses
+; surplus-i[N]        - (deprecated) see [P]-surpluses
+; surplus-n           - (deprecated) see [P]-surpluses
+; surplus-l           - (deprecated) see [P]-surpluses
 ; lorenz-points       - @...
 ; gini-index-reserve  - @...
-; final-goods         - @...
-; intermediate-inputs - @...
-; resource-types      - @...
-; labor-types         - @...
+; final-goods         - list of the economy's final goods (currently a numerical index)
+; intermediate-inputs - list of the economy's intermediate goods (currently a numerical index)
+; resource-types      - list of the economy's natural resource categories (currently a numerical index)
+; labor-types         - list of the economy's labor resource categories (currently a numerical index)
 ; [P]-prices          - prices for category P from {final, input, resource, labor}
 ; [P]-surpluses       - surpluses for category P from {final, input, resource, labor}
-; threshold-met?      - @...
+; threshold-met?      - signals end of iterations once equilibrium is obtained
 ;
 ;
 ;
@@ -151,7 +152,7 @@
 ; resource-exponent [x] - @... 
 ; labor-exponent [x]    - @... 
 ; effort-exponent       - @... 
-; product-price         - @... 
+; product-price         - used so that WCs can find their own prices of outputs
 ; price-list            - @... 
 ; supply-list           - @... 
 ; demand-list           - @... 
