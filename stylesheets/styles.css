@@ -163,6 +163,7 @@ section {
   width:500px;
   float:right;
   padding-bottom:50px;
+  background: url('../pequod.jpg') top no-repeat;
 }
 
 small {
