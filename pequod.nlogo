@@ -1513,7 +1513,7 @@ Supply and demand are normally represented graphically as curves of prices with 
 
 ### The Model
 
-This Netlogo model centers around planning iterations, with the goal of quickly reducing surplus. Worker and consumer councils make proposals concerning what they want to do, based upon current estimates of opportunity and social costs, which are adjusted between each iteration. The iterations stop when demand is within a configurable threshold of the supply for each economic category (industries, resources, etc.). Though not intrinsic to the model, the authors assume a yearly planning cycle, with the activity represented by this model occurring within the month of December for use starting in January.
+This Netlogo model centers around planning iterations, with the goal of quickly reducing surplus by matching supply and demand of consumer goods. Worker and consumer councils make proposals concerning what they want to produce and consume, based upon current estimates of opportunity and social costs as shown by the indicative prices for each good. The indicative prices are adjusted between each iteration, and the iterations stop when demand is within a configurable threshold of the supply for each economic category (industries, resources, etc.). Though not a part of this Netlogo model, the authors assume a yearly planning cycle will occur if this planning model is implemented in a real economy. For example, the planning process modeled could occur within the month of December for use starting in January for that year.
 
 #### Technical notes
 
@@ -1525,7 +1525,7 @@ The solutions to the production and utility functions are obtained analytically 
 
 ### Graphs
 
-The most important aspects of the interface are the graphs of price and quantity histories. If/when the surplus threshold is reached and the iterations stop, the number of iterations is the primary quantity of interest, followed by the shape of the graph that led to that equilibrium state. The particular values of each category at which equilibrium was reached are given in the middle of the interface, below the parameter controls.
+The most important aspects of the interface are the graphs of price and quantity histories. If/when the surplus threshold is reached and the iterations stop, the number of iterations is the primary quantity of interest, followed by the shape of the graph that led to that equilibrium state. Following convergence, the particular values of each category at which equilibrium was reached are given in the middle of the interface, below the parameter controls.
 
 ### Control Parameters
 
@@ -1537,7 +1537,7 @@ This is the threshold, as the ratio of supply to demand, at or under which the m
 
 #### Price delta
 
-This is the rate at which price adjustments are made. Default: 10%.
+This moderates the rate at which price adjustments are made. Default: 10%.
 
 #### Initial price vector
 
