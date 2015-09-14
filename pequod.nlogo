@@ -1491,21 +1491,35 @@ GDP / labor-supply
 @#$#@#$#@
 ## WHAT IS IT?
 
-**Participatory Planning Procedure Prototype** (PPPP, AKA _Pequod_)
+This Netlogo model--the Participatory Planning Procedure Prototype (PPPP, AKA _Pequod_)--is a feasibility study for an aspect of participatory economics, which requires participatory economic planning in iterations between councils composed of workers and councils composed of consumers. These councils are the agents of the system. Factory icons represent worker councils and house icons represent consumer councils.
 
-This Netlogo model is a feasibility study for an aspect of participatory economics, which requires participatory economic planning in iterations between councils composed of workers and councils composed of consumers. These councils are the agents of the system. Factory icons represent worker councils and house icons represent consumer councils.
-
-Participatory economics is a model for a new economy based on democracy, justice, and ecological sustainability proposed as an alternative to current Western economic systems. For an introduction to the primary concepts of Participatory Economics, see [ParticipatoryEconomics.info](http://participatoryeconomics.info), which provides free e-books and other informational materials.
+Participatory economics is a model for a new economy based on democracy, justice, and ecological sustainability proposed as an alternative to current Western economic systems. For an introduction to the primary concepts of participatory economics, see [ParticipatoryEconomics.info](http://participatoryeconomics.info), which provides free e-books and other informational materials.
 
 Macroscopic aspects of this Netlogo model are documented here. The variables, procedures, and reporters of the model are individually documented in the Code tab. A number of BehaviorSpace experiments have also been configured, which are documented in the section _How to Use It_.
 
 ## HOW IT WORKS
 
-The model centers around planning iterations. Worker and consumer councils make proposals concerning what they want to do, based upon current estimates of opportunity and social costs, which are adjusted between each iteration. The iterations stop when demand is within a configurable threshold of the supply for each economic category (industries, resources, etc).
+### Background Microeconomic Theory
 
-Some knowledge of microeconomics is necessary in order to explore with the model, but some basics are explained here.  @... [Explain supply and demand basics.] Cobb-Douglas production/utility functions are assumed, as is common in the literature. [Give formula and brief [Explain effort, disutility, etc.] [Explain difference between ulitiy and production versions.]
+Some knowledge of microeconomics is necessary in order to explore participatory economic planning with the model, but some basics are explained here.
 
-@...
+Economic production is quantified by supply, and economic consumption is quantified by demand. When there is an imbalance between these, there is said to be a surplus. An important activity of economic planning is _quickly_ reducing surplus. Commonly in economic literature these quantities are calculated using the Cobb-Douglas production/utility functions. For supply the production function is used and for demand the utility function is used. Each has the same general form, which is
+
+<center>Quantity = A(Input<sub>1</sub><sup>Elasticity<sub>1</sub></sup> * Input<sub>2</sub><sup>Elasticity<sub>2</sub></sup> * ... * Input<sub>N</sub><sup>Elasticity<sub>N</sub></sup>),</center>
+
+where A represents the total factor of productivity or utility, the inputs are things like resources, and the elasticities measure the responsiveness of the total quantity to a change in levels of each input quantity, which facilitates fine-tuning of unique outcomes for each economic agent.
+
+Supply and demand are normally represented graphically as curves of prices with respect to quantities.
+
+### The Model
+
+This Netlogo model centers around planning iterations, with the goal of quickly reducing surplus. Worker and consumer councils make proposals concerning what they want to do, based upon current estimates of opportunity and social costs, which are adjusted between each iteration. The iterations stop when demand is within a configurable threshold of the supply for each economic category (industries, resources, etc.). Though not intrinsic to the model, the authors assume a yearly planning cycle, with the activity represented by this model occurring within the month of December for use starting in January.
+
+#### Technical notes
+
+Requiring exact equality between supply and demand is unnecessary because the next year's plan is assumed to begin with parameters resulting in an initial divergence, though the initial price vector should be very similar to that reached during the prior planning cycle.
+
+The solutions to the production and utility functions are obtained analytically with a computer algebra system, and then added to the included file production-proposals.nls.
 
 ## HOW TO USE IT
 
@@ -1515,67 +1529,81 @@ The most important aspects of the interface are the graphs of price and quantity
 
 ### Control Parameters
 
-The model contains more parameters than are accessible in the interface, each of which is documented in the Code tab. The controllable parameters of primary interest to researchers in the model's current state will be those in the middle of the interface. At the bottom of the interface are parameters of interest in exploring performance enhancements, or for debugging purposes.
+The model contains more parameters than are accessible in the interface, each of which is documented at the top of the Code tab. The controllable parameters of primary interest to researchers in the model's current state are those in the middle of the interface. At the bottom of the interface are parameters of interest in exploring performance enhancements, or for debugging purposes.
+
+#### Surplus threshold
+
+This is the threshold, as the ratio of supply to demand, at or under which the model will cease iteration. Default: 1%.
+
+#### Price delta
+
+This is the rate at which price adjustments are made. Default: 10%.
+
+#### Initial price vector
+
+This is the list of starting prices for each input quantity.
 
 #### Experiment number
 
-This facilitates pseudo-randomization of the initial conditions affecting model behavior and heterogeneity of agents, which facilitates replication of results. That is, _all else being equal_, different experiment numbers produce different behavior, and running the model with the same experiment number will always produce the same behavior, allowing interesting behavior to be further explored and shared with colleagues. If you wish to explore the same initial conditions for varying populations, leave all but the experiment constant, and if you wish to explore changing parameters within the same populuation, change anything but the experiment.
+This facilitates pseudo-randomization of the initial conditions affecting model behavior and heterogeneity of agents, which facilitates replication of results. That is, _all else being equal_, different experiment numbers produce different behavior, and running the model with the same experiment number will always produce the same behavior, allowing interesting behavior to be further explored and shared with colleagues. If you wish to explore the same initial conditions for varying populations, leave all but the experiment constant, and if you wish to explore changing parameters within the same population, change anything but the experiment.
 
-@...
+#### Workers per council
 
-### Understanding Results
+This is the number of units of labor supplied to the general labor supply by each consumer council. The labor-supply reporter reflects this as the arithmetic product of this and the number of consumer councils.
 
-@...
+#### Natural resources supply
+
+This is the quantity of one input to the production functions, a hypothetical natural resource. Default: 1000.
+
+### BehaviorSpace Experiments
+
+By going to Tools > BehaviorSpace, users will find a number of per-configured experiments that can be executed to explore the dynamics of the model under specific initial conditions. The results are tabulated for analysis.
 
 ## THINGS TO NOTICE
 
 ### Number of Ticks/Iterations
 
-Reducing the number of ticks, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that approximately seven ticks is a maximum, which makes the processes feasbile for human activity. When exploring the model, take note of what parameter combinations result in the smallest number of ticks.
+Reducing the number of ticks, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that approximately seven ticks is a maximum, which makes the processes feasible for human activity. When exploring the model, take note of what parameter combinations result in the smallest number of ticks.
 
 ### Price/Quantity Dynamics
 
-Four dynamics have been discovered, but the sources of the dynamics are still not clear. These dynamics are common in models of this type: sinusoidal divergence, direct convergence, @... [These categories are not accurate...resolve.]
-
-Take note of what gives rise to the known dynamics, and look for new dynamics.
+As time progresses, the price and quantity values change in classifiable patterns. Take note of what gives rise to classes of dynamics, and look for new classes of dynamics.
 
 ## THINGS TO TRY
 
 ### Control Parameters
 
-#### Surplus Threshold
+Though any parameter can be modified, and the outcome dynamics explored, three parameters are of primary interest in exploring paths to rapid convergence of supply and demand.
 
-The behaviors noted so far are @... Take note of @... [larger thresholds result in fewer ticks to "convergence"] [requiring perfect equality is meaningless because the next year's plan starts with parameters resulting in an initial diverence anyway]
+#### Surplus threshold
 
-#### Price Delta
+This value has been found to be inversely proportional to the number of ticks to "convergence", but it must be decided what distances between supply and demand are acceptable.
 
-The behaviors noted so far are @... Take note of @... [too small, takes too long, too big, model doesn't converge] [for any given experiment there exists an optimal delta, which leads to convergence in the fewest number of iterations] [current experimental results suggests that values between 0.05 and 0.15 produce this result]
+#### Price delta
 
-#### Initial Price Vector.
+This value has been found to be inversely proportional to the number of ticks to convergence, but beyond a certain increasing value of the parameter, it is directly proportional to the number of ticks to convergence. Therefore, for any given experiment there exists an optimal delta, which leads to convergence in the fewest number of iterations. Current experimental results suggests that the optimal range is between 0.05 and 0.15.
 
-The behaviors noted so far are @... Take note of @... [closer to final price vector, fewer ticks]
+#### Initial price vector
 
-### Behavior Space Experiments
-
-@...
-
-A primary motivator for the current experiments is in performance analysis. Creating a set of protocols for more meaningful experiments is an objective for future work.
+As expected, for any given set of initial conditions, as these values approach the converging price vector, fewer ticks are needed to reach that converging set of values.
 
 ## EXTENDING THE MODEL
 
-Increasing the number of councils.
+The immediate objectives of the research team are to
 
-Increasing the number of produced goods, and adding public goods.
+* increase the number of councils, 
 
-Increasing the categories of labor.
+* increase the number of produced goods and add public goods,
 
-Increasing the number of primary resources.
+* increase the categories of labor,
 
-Relaxing convexity conditions on the production and utility functions.
+* increase the number of primary resources,
 
-Adding pollutants/externalities.
+* relax convexity conditions on the production and utility functions, which is to allow the exponents to sum to a number greater than one,
 
-There is a need for BehaviorSpace experiments that explore model behavior, instead of just model performance.
+* add pollutants/externalities,
+
+* and to create a set of protocols for more meaningful BehaviorSpace experiments.
 
 ## CREDITS AND REFERENCES
 
