@@ -45,21 +45,21 @@ to reset-prices
 end
 
 to standardize-prices
-  set init-price-f1 50
-  set init-price-f2 50
-  set init-price-i1 100
-  set init-price-i2 100
-  set init-price-n 50
-  set init-price-l 50
+  set init-price-f1 40
+  set init-price-f2 40
+  set init-price-i1 120
+  set init-price-i2 120
+  set init-price-n 30
+  set init-price-l 30
 end
 
 to randomize-prices
-  set init-price-f1 25 + random 50
-  set init-price-f2 25 + random 50
-  set init-price-i1 50 + random 75
-  set init-price-i2 50 + random 75
-  set init-price-n 25 + random 75
-  set init-price-l 25 + random 75
+  set init-price-f1 20 + random 40
+  set init-price-f2 20 + random 40
+  set init-price-i1 80 + random 70
+  set init-price-i2 80 + random 70
+  set init-price-n 15 + random 30
+  set init-price-l 15 + random 30
 end
 
 to randomize-councils
@@ -474,30 +474,40 @@ to-report space-list [listx]
   report butlast reduce sentence map [(list ? "        ")] listx
 end
 
+to lower-delta
+  set price-delta price-delta / 2
+end
+
+to-report total-produced
+  ifelse industry = 0
+    [report cq * (input-quantity 1 ^ input-exponent 1) * (input-quantity 2 ^ input-exponent 2) * (resource-quantity 1 ^ resource-exponent 1) * (labor-quantity 1 ^ labor-exponent 1) * (effort ^ xe)]
+    [report cq * (resource-quantity 1 ^ resource-exponent 1) * (labor-quantity 1 ^ labor-exponent 1) * (effort ^ xe)]
+end
+
 
 ;;;probably unused reporters below
 
-to-report produce
-  report cq * (qi1 ^ xi1) * (qi2 ^ xi2) * (qn ^ xn) * (ql ^ xl) * (effort ^ xe)
-end
-
-to-report deltas
-  report (list surplus-f1 surplus-f2 surplus-i1 surplus-i2 surplus-n surplus-l)
-end
-
-to normalize-prices
-  set price-f1 1000 * pf1 / pl
-  set price-f2 1000 * pf2 / pl
-  set price-i1 1000 * pi1 / pl
-  set price-i2 1000 * pi2 / pl
-  set price-n 1000 * pn / pl
-  set price-l 1000
-end
-
-to-report normal-price-vector
-  report (list (pf1 / pl)  (pf2 / pl)  (pi1 / pl)  (pi2 / pl)  (pn / pl)  (pl / pl) )
-end
-
+;to-report produce
+;  report cq * (qi1 ^ xi1) * (qi2 ^ xi2) * (qn ^ xn) * (ql ^ xl) * (effort ^ xe)
+;end
+;
+;to-report deltas
+;  report (list surplus-f1 surplus-f2 surplus-i1 surplus-i2 surplus-n surplus-l)
+;end
+;
+;to normalize-prices
+;  set price-f1 1000 * pf1 / pl
+;  set price-f2 1000 * pf2 / pl
+;  set price-i1 1000 * pi1 / pl
+;  set price-i2 1000 * pi2 / pl
+;  set price-n 1000 * pn / pl
+;  set price-l 1000
+;end
+;
+;to-report normal-price-vector
+;  report (list (pf1 / pl)  (pf2 / pl)  (pi1 / pl)  (pi2 / pl)  (pn / pl)  (pl / pl) )
+;end
+;
 
 ;to-report social-cost
 ;  report item 0 prices * qf1 + item 1 prices * qf2 + item 2 prices * qi1 + item 3 prices * qi2 + item 4 prices * qn + item 5 prices * ql
@@ -680,7 +690,7 @@ INPUTBOX
 548
 269
 init-price-f1
-50
+40
 1
 0
 Number
@@ -691,7 +701,7 @@ INPUTBOX
 634
 269
 init-price-f2
-50
+40
 1
 0
 Number
@@ -702,7 +712,7 @@ INPUTBOX
 960
 269
 init-price-l
-50
+30
 1
 0
 Number
@@ -713,7 +723,7 @@ INPUTBOX
 717
 269
 init-price-i1
-100
+120
 1
 0
 Number
@@ -724,7 +734,7 @@ INPUTBOX
 797
 269
 init-price-i2
-100
+120
 1
 0
 Number
@@ -735,7 +745,7 @@ INPUTBOX
 878
 269
 init-price-n
-50
+30
 1
 0
 Number
@@ -990,7 +1000,7 @@ INPUTBOX
 624
 76
 experiment-number
-1
+97500
 1
 0
 Number
@@ -1237,7 +1247,7 @@ INPUTBOX
 380
 749
 viewing
-0
+103
 1
 0
 Number
