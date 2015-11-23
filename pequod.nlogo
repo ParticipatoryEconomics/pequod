@@ -182,9 +182,9 @@ end
 to go
   iterate-plan
   update-lorenz-and-gini
-  tick
   check-surpluses
   if threshold-met? [round-prices propose-i propose-f propose-c stop]
+  tick
 end
 
 to check-surpluses
