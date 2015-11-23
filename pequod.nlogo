@@ -1894,6 +1894,383 @@ setup</setup>
       <value value="100"/>
     </enumeratedValueSet>
   </experiment>
+  <experiment name="new-councils-experiment-05" repetitions="500" runMetricsEveryStep="false">
+    <setup>randomize-councils
+setup</setup>
+    <go>go</go>
+    <timeLimit steps="3000"/>
+    <metric>final-price 1</metric>
+    <metric>final-price 2</metric>
+    <metric>input-price 1</metric>
+    <metric>input-price 2</metric>
+    <metric>resource-price 1</metric>
+    <metric>labor-price 1</metric>
+    <metric>sum [output] of final-producers 1</metric>
+    <metric>sum [output] of final-producers 2</metric>
+    <metric>sum [output] of input-producers 1</metric>
+    <metric>sum [output] of input-producers 2</metric>
+    <metric>GDP</metric>
+    <metric>mean [consumer-utility] of ccs</metric>
+    <metric>gini</metric>
+    <enumeratedValueSet variable="experiment-number">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="price-delta">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="natural-resources-supply">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f2">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="consumer-councils">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="utility-multiplier">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cq-init">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="surplus-threshold">
+      <value value="0.01"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f1">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="du-init">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ce-init">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-l">
+      <value value="31"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-n">
+      <value value="31"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="viewing">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i2">
+      <value value="114"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="workers-per-council">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i1">
+      <value value="114"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="new-price-delta-experiment" repetitions="1" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="3000"/>
+    <metric>final-price 1</metric>
+    <metric>final-price 2</metric>
+    <metric>input-price 1</metric>
+    <metric>input-price 2</metric>
+    <metric>resource-price 1</metric>
+    <metric>labor-price 1</metric>
+    <metric>sum [output] of final-producers 1</metric>
+    <metric>sum [output] of final-producers 2</metric>
+    <metric>sum [output] of input-producers 1</metric>
+    <metric>sum [output] of input-producers 2</metric>
+    <metric>GDP</metric>
+    <metric>mean [consumer-utility] of ccs</metric>
+    <metric>gini</metric>
+    <enumeratedValueSet variable="experiment-number">
+      <value value="99434"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="price-delta">
+      <value value="0.01"/>
+      <value value="0.02"/>
+      <value value="0.03"/>
+      <value value="0.04"/>
+      <value value="0.05"/>
+      <value value="0.06"/>
+      <value value="0.07"/>
+      <value value="0.08"/>
+      <value value="0.09"/>
+      <value value="0.1"/>
+      <value value="0.11"/>
+      <value value="0.12"/>
+      <value value="0.13"/>
+      <value value="0.14"/>
+      <value value="0.15"/>
+      <value value="0.16"/>
+      <value value="0.17"/>
+      <value value="0.18"/>
+      <value value="0.19"/>
+      <value value="0.2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="natural-resources-supply">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f2">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="consumer-councils">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="utility-multiplier">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cq-init">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="surplus-threshold">
+      <value value="0.01"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f1">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="du-init">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ce-init">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-l">
+      <value value="31"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-n">
+      <value value="31"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="viewing">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i2">
+      <value value="114"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="workers-per-council">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i1">
+      <value value="114"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="big-experiment" repetitions="10000" runMetricsEveryStep="false">
+    <setup>set experiment-number behaviorspace-run-number
+setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>final-price 1</metric>
+    <metric>final-price 2</metric>
+    <metric>input-price 1</metric>
+    <metric>input-price 2</metric>
+    <metric>resource-price 1</metric>
+    <metric>labor-price 1</metric>
+    <metric>sum [output] of final-producers 1</metric>
+    <metric>sum [output] of final-producers 2</metric>
+    <metric>sum [output] of input-producers 1</metric>
+    <metric>sum [output] of input-producers 2</metric>
+    <metric>GDP</metric>
+    <metric>mean [consumer-utility] of ccs</metric>
+    <metric>gini</metric>
+    <enumeratedValueSet variable="experiment-number">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="price-delta">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="natural-resources-supply">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f2">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="consumer-councils">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="utility-multiplier">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cq-init">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="surplus-threshold">
+      <value value="0.01"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f1">
+      <value value="42"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="du-init">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ce-init">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-l">
+      <value value="31"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-n">
+      <value value="31"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="viewing">
+      <value value="107"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i2">
+      <value value="114"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="workers-per-council">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i1">
+      <value value="114"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="mean-price-experiment-05" repetitions="100" runMetricsEveryStep="false">
+    <setup>randomize-councils
+setup</setup>
+    <go>go</go>
+    <timeLimit steps="2000"/>
+    <metric>final-price 1</metric>
+    <metric>final-price 2</metric>
+    <metric>input-price 1</metric>
+    <metric>input-price 2</metric>
+    <metric>resource-price 1</metric>
+    <metric>labor-price 1</metric>
+    <metric>sum [output] of final-producers 1</metric>
+    <metric>sum [output] of final-producers 2</metric>
+    <metric>sum [output] of input-producers 1</metric>
+    <metric>sum [output] of input-producers 2</metric>
+    <metric>GDP</metric>
+    <metric>mean [consumer-utility] of ccs</metric>
+    <metric>gini</metric>
+    <enumeratedValueSet variable="experiment-number">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="price-delta">
+      <value value="0.05"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="natural-resources-supply">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f2">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="consumer-councils">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="utility-multiplier">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cq-init">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="surplus-threshold">
+      <value value="0.01"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f1">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="du-init">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ce-init">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-l">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-n">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="viewing">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i2">
+      <value value="120"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="workers-per-council">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i1">
+      <value value="120"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="consumer-experiment" repetitions="1" runMetricsEveryStep="false">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="1000"/>
+    <metric>final-price 1</metric>
+    <metric>final-price 2</metric>
+    <metric>input-price 1</metric>
+    <metric>input-price 2</metric>
+    <metric>resource-price 1</metric>
+    <metric>labor-price 1</metric>
+    <metric>sum [output] of final-producers 1</metric>
+    <metric>sum [output] of final-producers 2</metric>
+    <metric>sum [output] of input-producers 1</metric>
+    <metric>sum [output] of input-producers 2</metric>
+    <metric>GDP</metric>
+    <metric>mean [consumer-utility] of ccs</metric>
+    <metric>gini</metric>
+    <enumeratedValueSet variable="experiment-number">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="price-delta">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="natural-resources-supply">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f2">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="consumer-councils">
+      <value value="50"/>
+      <value value="60"/>
+      <value value="70"/>
+      <value value="80"/>
+      <value value="90"/>
+      <value value="100"/>
+      <value value="110"/>
+      <value value="120"/>
+      <value value="130"/>
+      <value value="140"/>
+      <value value="150"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="utility-multiplier">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cq-init">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="surplus-threshold">
+      <value value="0.01"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-f1">
+      <value value="40"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="du-init">
+      <value value="2"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="ce-init">
+      <value value="1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-l">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-n">
+      <value value="30"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="viewing">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i2">
+      <value value="120"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="workers-per-council">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="init-price-i1">
+      <value value="120"/>
+    </enumeratedValueSet>
+  </experiment>
 </experiments>
 @#$#@#$#@
 @#$#@#$#@
