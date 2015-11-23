@@ -92,8 +92,8 @@ to setup   ;;  var  f1  f2  i1  i2  n1  l1
     set income 100 * effort
     set shape "house"
     set color yellow
-    set yf1 .25 + random-float .5 ;random-float 0.5
-    set yf2 1 - yf1 ;random-float 0.5
+    set yf1 .3 + random-float .2 ;random-float 0.5
+    set yf2 .3 + random-float .2 ;random-float 0.5
     set cy 2 + random-float 2 
     set size cy / 2
     set xcor random-pxcor ;min-pxcor + random max-pxcor
