@@ -1300,6 +1300,17 @@ GDP / labor-supply
 1
 11
 
+MONITOR
+688
+617
+744
+662
+NIL
+[sum productivity] of wc viewing
+3
+1
+11
+
 @#$#@#$#@
 ## WHAT IS IT?
 
