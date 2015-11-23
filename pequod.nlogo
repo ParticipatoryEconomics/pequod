@@ -1000,7 +1000,7 @@ INPUTBOX
 624
 76
 experiment-number
-97500
+0
 1
 0
 Number
