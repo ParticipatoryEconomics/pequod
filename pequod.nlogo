@@ -295,7 +295,7 @@ end
 
 to-report check-bounds [x]
   ;report x
-  if x > 100000 [report 100000]
+  if x > 10000 [report 10000]
   ifelse x <= 0.0001 [report .0001][report x]
 end
 
