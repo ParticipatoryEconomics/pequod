@@ -295,8 +295,7 @@ to setup
     set size 0.5 + (log num-workers 10) ;cy / 2
     set color yellow - 4 + (cy * 2)
     set shape "house"
-    set xcor random-pxcor ;min-pxcor + random max-pxcor
-    set ycor 5 + random (max-pxcor - 5) ;random-pycor
+    move-house
   ]
   create-wcs 5 [ set industry 0 set product 1 set base-color green]
   create-wcs 5 [ set industry 0 set product 2 set base-color blue]
@@ -335,6 +334,15 @@ to setup
   ]
   update-lorenz-and-gini
   reset-ticks
+end
+
+to-report unit-width
+  report world-width / (consumer-councils + 1)
+end
+
+to move-house
+  set xcor min-pxcor + (unit-width * who ) ;random-pxcor ;min-pxcor + random max-pxcor
+  set ycor 5 * (cy - 1) ;random (max-pycor - 5) ;random-pycor
 end
 
 to factory-sort [x]
