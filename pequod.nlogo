@@ -207,6 +207,7 @@ breed [wcs wc]
 
 ccs-own [ effort df1 df2 income
               cy yf1 yf2
+              num-workers
               final-demands ]
 
 wcs-own [ industry
@@ -287,12 +288,13 @@ to setup
   create-ccs consumer-councils [
     set effort 1; (1 + random-float .25 - random-float .25)
     set income 100 * effort
-    set shape "house"
-    set color yellow
+    set num-workers workers-per-council ;+ random 5 - random 5
     set yf1 .3 + random-float .2 ;random-float 0.5
     set yf2 .3 + random-float .2 ;random-float 0.5
     set cy 2 + random-float 2 
-    set size cy / 2
+    set size 0.5 + (log num-workers 10) ;cy / 2
+    set color yellow - 4 + (cy * 2)
+    set shape "house"
     set xcor random-pxcor ;min-pxcor + random max-pxcor
     set ycor 5 + random (max-pxcor - 5) ;random-pycor
   ]
@@ -501,7 +503,8 @@ to plot-if-small [x]
 end
 
 to-report labor-supply
-  report workers-per-council * count ccs  ;wcs
+;  report workers-per-council * count ccs  ;wcs
+  report sum [num-workers] of ccs
 end
 
 to-report pf1
