@@ -22,8 +22,10 @@ for line in f:
     line = r.sub(r'e ^ (', line)
 
     # NL spacing requirements
-    r = re.compile(r'([*+/^-])')
-    line = r.sub(r' \1 ', line)
+    r = re.compile(r'([^ ])([*+/^-])')
+    line = r.sub(r'\1 \2', line)
+    r = re.compile(r'([*+/^-])([^ ])')
+    line = r.sub(r'\1 \2', line)
 
     print line + "\n"
 
