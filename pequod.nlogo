@@ -1530,7 +1530,9 @@ This Netlogo model--the Participatory Planning Procedure Prototype (PPPP, AKA _P
 
 Participatory economics is a model for a new economy based on democracy, justice, and ecological sustainability proposed as an alternative to current Western economic systems. For an introduction to the primary concepts of participatory economics, see [ParticipatoryEconomics.info](http://participatoryeconomics.info), which provides free e-books and other informational materials.
 
-Macroscopic aspects of this Netlogo model are documented here. The variables, procedures, and reporters of the model are individually documented in the Code tab. A number of BehaviorSpace experiments have also been configured, which are documented in the section _How to Use It_.
+The primary goal of this model is to demonstrate that a non-competitive market model can, in a reasonable number of iterations, reach the same equilibrium prices as paradigmatic competitive models. To this end, a number of BehaviorSpace experiments have been configured, which are documented in the section _THINGS TO TRY_. These experiments allow the exploration of convergence/divergence behaviors.
+
+Macroscopic aspects of this Netlogo model are documented here. The variables, procedures, and reporters of the model are individually documented in the Code tab.
 
 ## HOW IT WORKS
 
@@ -1590,19 +1592,15 @@ This is the number of units of labor supplied to the general labor supply by eac
 
 This is the quantity of one input to the production functions, a hypothetical natural resource. Default: 1000.
 
-### BehaviorSpace Experiments
-
-By going to Tools > BehaviorSpace, users will find a number of per-configured experiments that can be executed to explore the dynamics of the model under specific initial conditions. The results are tabulated for analysis.
-
 ## THINGS TO NOTICE
 
 ### Number of Ticks/Iterations
 
-Reducing the number of ticks, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that approximately seven ticks is a maximum, which makes the processes feasible for human activity. When exploring the model, take note of what parameter combinations result in the smallest number of ticks.
+Reducing the number of ticks to equilibrium/convergence, which correspond to iterations in council negotiations, is a primary objective of model experiments. The authors suggest that approximately seven ticks is a maximum, which makes the processes feasible for human activity. When exploring the model, take note of what parameter combinations result in the smallest number of ticks.
 
 ### Price/Quantity Dynamics
 
-As time progresses, the price and quantity values change in classifiable patterns. Take note of what gives rise to classes of dynamics, and look for new classes of dynamics.
+As time progresses, the price and quantity values change in classifiable patterns toward convergence, or lack thereof. Take note of what gives rise to classes of dynamics, such as oscillation, and look for new classes of dynamics.
 
 ## THINGS TO TRY
 
@@ -1621,6 +1619,16 @@ This value has been found to be inversely proportional to the number of ticks to
 #### Initial price vector
 
 As expected, for any given set of initial conditions, as these values approach the converging price vector, fewer ticks are needed to reach that converging set of values.
+
+### BehaviorSpace Experiments
+
+By going to Tools > BehaviorSpace, users will find a number of pre-configured experiments that can be executed to explore the dynamics of the model under specific initial conditions. The results are tabulated for analysis.
+
+As noted, the primary goal of the model is to demonstrate that a non-competitive market model can, in a reasonable number of iterations, reach the same equilibrium prices as paradigmatic competitive models. Therefore, exploring which parameter values result in convergence, or lack thereof, and how, is paramount, and the BehaviorSpace experiments facilitate this.
+
+In each experiment, note which, if any, variables are configured to vary through each experiment. Our typical approach is to not adjust values here, but rather in the setup commands. Therefore, in each experiment, note which setup commands are executed, and reference those procedures' documentation in the Code tab of the model.
+
+The two most impactive sources of interesting behavior toward convergence/divergence are price adjustments, and price-delta adjustments (the size of changes between each iteration in an experimental run). See each of these experiments to start your exploration.
 
 ## EXTENDING THE MODEL
 
